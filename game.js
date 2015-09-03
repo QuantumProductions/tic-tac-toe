@@ -6,8 +6,11 @@ game.board = [[' ', ' ', ' '],
               [' ', ' ', ' ']]; 
 
 game.pieces = {
-	' ':'empty'
+	' ': function(board, piece, x, y) {
+		console.log('x' + x);
+		console.log('y' + y);
+	}
 };
 
-console.log(game.pieces[' ']);
-console.log(game.pieces[game.board[0][0]]);
+game.pieces[game.board[0][0]](game.board, null, 3, 5);
+
