@@ -5,4 +5,9 @@ game.board = [[' ', ' ', ' '],
               [' ', ' ', ' '],
               [' ', ' ', ' ']]; 
 
-console.log(game)
+game.pieces = {
+	' ':'empty'
+};
+
+console.log(game.pieces[' ']);
+console.log(game.pieces[game.board[0][0]]);
