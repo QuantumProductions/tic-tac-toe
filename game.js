@@ -10,11 +10,16 @@ game.pieces = {
 		if (piece === 'x') {
 			board[y][x] = "X";
 		}
+	},
+	'X': function(board, piece, x, y, data) {
+		board.error = 'Occupied space';
 	}
 };
 
+console.log("0/0" + game.board[0][0]);
+
+game.pieces[game.board[0][0]](game.board, "x", 0, 0);
 console.log(game.board[0][0]);
 
 game.pieces[game.board[0][0]](game.board, "x", 0, 0);
-
-console.log(game.board[0][0]);
+console.log(game.board.error);
