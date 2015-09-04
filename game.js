@@ -1,6 +1,6 @@
 var game = {};
 
-game.players = {'1': {'piece':'x', 'data':{'team':'X'}}, '2': {'piece':'o', 'data':{'team':'O'}} }
+game.current_player = "X";
 game.players = {'X':'X', 'O':'O'}
 game.board = [[' ', ' ', ' '],
               [' ', ' ', ' '],
@@ -22,7 +22,19 @@ game.pieces = {
 	}
 };
 
+var cyclePlayers = function() {
+		if (game.current_player === "X") {
+			game.current_player = "O";
+		} else if (game.current_player === "Y") {
+			game.current_player = "X";
+		}
+}
+
 var move = function(player, x, y) {
+	if (player != game.current_player) {
+		console.log("Not your turn");
+		return;
+	}
 	var piece = game.players[player];
 	var targetPiece = game.board[y][x];
 	var pieceFunction = game.pieces[targetPiece];
@@ -30,11 +42,14 @@ var move = function(player, x, y) {
 	if (game.board.error != null) {
 		console.log(game.board.error)
 	} else {
-		//cycle players
-		console.log(game.board[0][0]);
-		console.log(game.board[1][0]);
+		cyclePlayers();
 	}
 }
 
 move("X", 0, 0);
-move("O", 0, 1);
+move("O", 1, 0);
+
+console.log(game.board[0][0]);
+console.log(game.board[0][1]);
+console.log(game.board[1][0]);
+console.log(game.board[1][1]);
