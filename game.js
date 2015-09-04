@@ -1,35 +1,5 @@
 var game = {};
 
-game.current_player = "X";
-game.players = {'X':'X', 'O':'O'}
-game.board = [[' ', ' ', ' '],
-              [' ', ' ', ' '],
-              [' ', ' ', ' ']]; 
-
-game.pieces = {
-	' ': function(board, piece, x, y, data) {
-		if (piece === 'X') {
-			board[y][x] = "X";
-		} else if (piece === "O") {
-			board[y][x] = "O";
-		}
-	},
-	'X': function(board, piece, x, y, data) {
-		board.error = 'Occupied space';
-	},
-	'O': function(board, piece, x, y, data) {
-		board.error = 'Occupied space';
-	}
-};
-
-var cyclePlayers = function() {
-		if (game.current_player === "X") {
-			game.current_player = "O";
-		} else if (game.current_player === "Y") {
-			game.current_player = "X";
-		}
-}
-
 var move = function(player, x, y) {
 	if (player != game.current_player) {
 		console.log("Not your turn");
@@ -45,11 +15,3 @@ var move = function(player, x, y) {
 		cyclePlayers();
 	}
 }
-
-move("X", 0, 0);
-move("O", 1, 0);
-
-console.log(game.board[0][0]);
-console.log(game.board[0][1]);
-console.log(game.board[1][0]);
-console.log(game.board[1][1]);
