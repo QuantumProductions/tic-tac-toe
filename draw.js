@@ -19,8 +19,8 @@ context = canvas.getContext('2d');
 
 
 canvas.addEventListener('click', function(e) { 	
-  cursor.x = e.pageX;
-  cursor.y = e.pageY;
+  cursor.x = e.pageX - 9;
+  cursor.y = e.pageY - 9;
 	processClick();
 }, false);
 
