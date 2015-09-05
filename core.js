@@ -12,6 +12,7 @@ var move = function(player, x, y) {
 	evaluateResolution();
 	if (game.board.error != null) {
 		console.log(game.board.error)
+		game.board.error = null;
 	} else {
 		cyclePlayers();
 	}
