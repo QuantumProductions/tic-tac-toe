@@ -1,4 +1,7 @@
-var renderW = 50;
+game.render_distances = {};
+game.render_distances["tile_size"] = 50;
+
+var renderW = game.render_distances["tile_size"];
 
 game.render_pieces = {
 		' ': function(board, x, y, data) {
