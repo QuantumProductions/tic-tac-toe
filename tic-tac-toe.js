@@ -5,6 +5,20 @@ var setupGame = function(){
 	              [' ', ' ', ' '],
 	              [' ', ' ', ' ']]; 
 
+	var w = 50;
+
+	game.render_pieces = {
+		' ': function(board, x, y, data) {
+			drawRect(x * w, y * w, w, w, "white");
+		},
+		'X': function(board, x, y, data) {
+			drawRect(x * w, y * w, w, w, "blue");
+		},
+		'O': function(board, x, y, data) {
+			drawRect(x * w, y * w, w, w, "green");
+		},
+	}
+
 	game.pieces = {
 		' ': function(board, piece, x, y, data) {
 			if (piece === 'X') {
