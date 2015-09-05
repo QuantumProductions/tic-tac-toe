@@ -14,10 +14,10 @@ var setupGame = function(){
 			}
 		},
 		'X': function(board, piece, x, y, data) {
-			board.error = 'Occupied space';
+			board.error = 'X Occupied space' + x + "y" + y;
 		},
 		'O': function(board, piece, x, y, data) {
-			board.error = 'Occupied space';
+			board.error = 'O Occupied space' + x + "y" + y;
 		}
 	};
 
