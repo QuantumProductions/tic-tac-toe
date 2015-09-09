@@ -1,19 +1,25 @@
-var game = {};
+var logic = require('./logic.js');
 
 var move = function(game, player, x, y) {
 	if (player != game.current_player) {
 		console.log("Not your turn");
-		return;
+		return game;
 	}
 	var piece = game.players[player];
 	var targetPiece = game.board[y][x];
 	var pieceFunction = game.pieces[targetPiece];
 	pieceFunction(game.board, piece, x, y, null);
-	evaluateResolution();
+	logic.evaluateResolution(game);
 	if (game.board.error != null) {
 		console.log(game.board.error)
 		game.board.error = null;
 	} else {
-		cyclePlayers();
+		logic.cyclePlayers(game);
 	}
+
+	return game;
 }
+
+module.exports = {
+	"move": move
+};
