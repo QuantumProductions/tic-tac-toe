@@ -1,6 +1,6 @@
 var game = {};
 
-var move = function(player, x, y) {
+var move = function(game, player, x, y) {
 	if (player != game.current_player) {
 		console.log("Not your turn");
 		return;

@@ -4,7 +4,7 @@ function processClick() {
 	var y = Math.floor(cursor.y / game.render_distances['tile_size']);
 	console.log("X" + x + "Y" + y);
 
-	move(game.current_player, x, y);
+	move(game, game.current_player, x, y);
 }
 
 function processMouseMove() {

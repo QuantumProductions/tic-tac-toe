@@ -1,4 +1,4 @@
-var setupGame = function(){
+setupGame = function(game){
 	game.current_player = "X";
 	game.players = {'X':'X', 'O':'O'}
 	game.board = [[' ', ' ', ' '],
@@ -21,9 +21,10 @@ var setupGame = function(){
 		}
 	};
 
+	return game;
 }
 
-var cyclePlayers = function() {
+var cyclePlayers = function(game) {
 		if (game.current_player === "X") {
 			game.current_player = "O";
 		} else if (game.current_player === "O") {
@@ -31,7 +32,7 @@ var cyclePlayers = function() {
 		}
 }
 
-var evaluateResolution = function() {
+var evaluateResolution = function(game) {
 	var board = game.board;
 	var winningAlignments = [
 	 	[[0,0], [0,1], [0,2]],
@@ -72,3 +73,9 @@ var evaluateResolution = function() {
  
  	console.log("winner: " + game.winner);
 }
+
+module.exports = {
+	"setupGame": setupGame,
+	"cyclePlayers": cyclePlayers,
+	"evaluateResolution": evaluateResolution,
+};
