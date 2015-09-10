@@ -10,15 +10,12 @@ app.get('/', function (req, res) {
 });
 
 app.get('/board', function (req, res) {
-	game = logic.setupGame(game);
+	game = logic.setupGame(game, req.query);
 	res.json(game.board);
 });
 
 app.get('/move', function (req, res) {
-	var player = req.query.player;
-	var x = req.query.x;
-	var y = req.query.y;
-	game = core.move(game, player, x, y);
+	game = core.move(game, req.query);
 	res.json(game.board);
 });
 

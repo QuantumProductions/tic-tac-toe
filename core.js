@@ -1,6 +1,9 @@
 var logic = require('./logic.js');
 
-var move = function(game, player, x, y) {
+var move = function(game, query) {
+	var player = query.player;
+	var x = query.x;
+	var y = query.y;
 	if (player != game.current_player) {
 		console.log("Not your turn");
 		return game;

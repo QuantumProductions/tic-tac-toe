@@ -1,4 +1,4 @@
-setupGame = function(game){
+setupGame = function(game, query){
 	game.current_player = "X";
 	game.players = {'X':'X', 'O':'O'}
 	game.board = [[' ', ' ', ' '],
