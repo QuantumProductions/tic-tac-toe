@@ -4,7 +4,21 @@ function processClick() {
 	var y = Math.floor(cursor.y / game.render_distances['tile_size']);
 	console.log("X" + x + "Y" + y);
 
-	move(game, game.current_player, x, y);
+	var url = "http://localhost:3000/move?player=" + player + "&x=" + x;
+	url = url + "&y=";
+	url = url + y;
+
+	http.get({
+    url: url,
+    onload: function() { 
+    	game.board = JSON.parse(this.responseText);
+    	if (player === "X") {
+    		player = "O";
+    	} else if (player === "O") {
+    		player = "X";
+    	}
+    }
+	});
 }
 
 function processMouseMove() {
