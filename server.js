@@ -53,7 +53,6 @@ findGame = function(req) {
 	if (games.length <= game_id) {
 		var game = games[game_id-1];
 		game.error = null;
-		game.board.error = null;
 		return game;
 	}
 
