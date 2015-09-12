@@ -4,7 +4,7 @@ function processClick() {
 	var y = Math.floor(cursor.y / game.render_distances['tile_size']);
 	console.log("X" + x + "Y" + y);
 
-	var url = "http://localhost:3000/move?player=" + player + "&x=" + x;
+	var url = "http://localhost:3000/game/" + game.game_id + "/move?player=" + player + "&x=" + x;
 	url = url + "&y=";
 	url = url + y;
 
@@ -26,6 +26,10 @@ function processMouseMove() {
 }
 
 function draw() {
+	if (game === null) {
+		return;
+	}
+
 	var i = 0;
 	var j = 0;
 

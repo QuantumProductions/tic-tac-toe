@@ -5,7 +5,7 @@
 <script type="text/javascript">
 var require = function() {};
 var module = {};
-var game = {};
+var game = null;
 var player = "X";
 </script>
 <script src="client.js" type="text/javascript"></script>
@@ -16,13 +16,13 @@ var player = "X";
 <script src="http.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-console.log("real game" + game);
-game = setupGame(game, null);
-console.log(game);
 
 http.get({
-    url: "http://localhost:3000/board",
-    onload: function() { console.log(JSON.parse(this.responseText)) }
+    url: "http://localhost:3000/game/new",
+    onload: function() { 
+    	game = JSON.parse(this.responseText);
+    	installRendering(game);
+    }
 });
 
 
