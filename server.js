@@ -30,10 +30,10 @@ app.get('/game/new', function (req, res) {
 	res.json(game);
 });
 
-app.get('/player/new', function (req, res) {
-	player = {};
-	player = roster.registerPlayer(player, req);
-	res.json(player);
+app.get('/account/new', function (req, res) {
+	account = {};
+	account = roster.registerAccount(account, req);
+	res.json(account);
 });
 
 var server = app.listen(3000, function () {

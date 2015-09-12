@@ -1,18 +1,18 @@
-var players = {};
+var accounts = {};
 
-registerPlayer = function(player, req) {
+registerAccount = function(account, req) {
 	var name = req.query.name;
-	if (players[name] === undefined) {
-		player.name = name;
-		players[name] = player;
+	if (accounts[name] === undefined) {
+		account.name = name;
+		accounts[name] = account;
 	} else {
-		player.error = "Player exists";
+		account.error = "Account exists with that name.";
 	}
 
-	return player;
+	return account;
 };
 
 module.exports = {
-	"registerPlayer" : registerPlayer,
-	"players" : players
+	"registerAccount": registerAccount,
+	"accounts" : accounts
 };
