@@ -51,7 +51,10 @@ var server = app.listen(3000, function () {
 findGame = function(req) {
 	var game_id = parseInt(req.params.id);
 	if (games.length <= game_id) {
-		return games[game_id-1];
+		var game = games[game_id-1];
+		game.error = null;
+		game.board.error = null;
+		return game;
 	}
 
 	return null;
