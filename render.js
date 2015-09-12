@@ -1,10 +1,10 @@
-function installRendering(game) {
-	game.render_distances = {};
-	game.render_distances["tile_size"] = 50;
+function installRendering(client) {
+	client.render_distances = {};
+	client.render_distances["tile_size"] = 50;
 
-	var renderW = game.render_distances["tile_size"];
+	var renderW = client.render_distances["tile_size"];
 
-	game.render_pieces = {
+	client.render_pieces = {
 			' ': function(board, x, y, data) {
 				drawRect(x * renderW, y * renderW, renderW, renderW, "white");
 			},

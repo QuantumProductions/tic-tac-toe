@@ -5,12 +5,13 @@ var core = require("./core.js");
 var logic = require("./logic.js");
 var games = [];
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
-
 app.get('/game/:id/board', function (req, res) {
 	game = findGame(req);
+	if (game === null) {
+		res.json({'error' : 'No game found'});
+		return;
+	}
+
 	res.json(game.board);
 });
 
@@ -22,7 +23,7 @@ app.get('/game/:id/move', function (req, res) {
 	}
 
 	game = core.move(game, req.query);
-	res.json(game.board);
+	res.json(game);
 });
 
 app.get('/game/new', function (req, res) {
@@ -37,7 +38,7 @@ var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
 
-  console.log('Example app listening at http://%s:%s', host, port);
+  console.log('Quantum Productions Game server listening at http://%s:%s', host, port);
 });
 
 findGame = function(req) {

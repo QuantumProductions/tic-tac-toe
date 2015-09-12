@@ -8,7 +8,7 @@ var move = function(game, query) {
 		console.log("Not your turn");
 		return game;
 	}
-	var piece = game.players[player];
+	var piece = game.players[player]; //loadPiece(game,query)
 	var targetPiece = game.board[y][x];
 	var pieceFunction = game.pieces[targetPiece];
 	pieceFunction(game.board, piece, x, y, null);

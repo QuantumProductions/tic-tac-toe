@@ -6,7 +6,7 @@
 var require = function() {};
 var module = {};
 var game = null;
-var player = "X";
+var client = {};
 </script>
 <script src="client.js" type="text/javascript"></script>
 <script src="draw.js" type="text/javascript"></script>
@@ -14,16 +14,11 @@ var player = "X";
 <script src="render.js" type="text/javascript"></script>
 <script src="logic.js" type="text/javascript"></script>
 <script src="http.min.js" type="text/javascript"></script>
+<script src="client_setup.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-
-http.get({
-    url: "http://localhost:3000/game/new",
-    onload: function() { 
-    	game = JSON.parse(this.responseText);
-    	installRendering(game);
-    }
-});
+client = setupClient(client);
+client.startNewGame();
 
 
 </script>

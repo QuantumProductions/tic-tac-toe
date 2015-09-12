@@ -8,7 +8,7 @@ setupGame = function(game, query){
 	game.pieces = {
 		' ': function(board, piece, x, y, data) {
 			if (piece === 'X') {
-				board[y][x] = "X";
+				board[y][x] = "X"; //data = query.data; moving piece: fboard[data][y][data][x] = ""
 			} else if (piece === "O") {
 				board[y][x] = "O";
 			}
