@@ -8,7 +8,7 @@ var games = [];
 
 app.get('/game/:id/board', function (req, res) {
 	game = findGame(req);
-	if (game === null) {
+	if (!game) {
 		res.json({'error' : 'No game found'});
 		return;
 	}
@@ -18,11 +18,6 @@ app.get('/game/:id/board', function (req, res) {
 
 app.get('/game/:id/move', function (req, res) {
 	game = findGame(req);
-	if (game === null) {
-		res.json({'error' : 'No game found'});
-		return;
-	}
-
 	game = core.move(game, req.query);
 	res.json(game);
 });
@@ -50,11 +45,11 @@ var server = app.listen(3000, function () {
 
 findGame = function(req) {
 	var game_id = parseInt(req.params.id);
-	if (games.length <= game_id) {
+	if (game_id <= games.length) {
 		var game = games[game_id-1];
 		game.error = null;
 		return game;
 	}
 
-	return null;
+	return {'error' : 'Game not found'};
 };
