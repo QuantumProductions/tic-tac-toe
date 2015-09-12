@@ -3,6 +3,7 @@ var json = require('express-json');
 var app = express().use(json());
 var core = require("./core.js");
 var logic = require("./logic.js");
+var roster = require("./roster.js");
 var games = [];
 
 app.get('/game/:id/board', function (req, res) {
@@ -32,6 +33,12 @@ app.get('/game/new', function (req, res) {
 	game.game_id = games.length + 1;
 	games.push(game);
 	res.json(game);
+});
+
+app.get('/player/new', function (req, res) {
+	player = {};
+	player = roster.registerPlayer(player, req);
+	res.json(player);
 });
 
 var server = app.listen(3000, function () {
