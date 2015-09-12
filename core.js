@@ -1,6 +1,9 @@
 var logic = require('./logic.js');
 
 var move = function(game, query) {
+	if (game.error) {
+		return game;
+	}
 	var player = query.player;
 	var x = query.x;
 	var y = query.y;
