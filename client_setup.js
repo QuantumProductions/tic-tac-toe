@@ -25,6 +25,8 @@ function setupClient(client) {
 	    	client.player = game.current_player;
 	    	if (game.winner != undefined) {
 	    		alert("Winner is " + game.winner);
+	    	} else if (game.error) {
+	    		alert("Error: " + game.error);
 	    	}
 	    }
 		});
