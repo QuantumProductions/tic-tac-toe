@@ -4,10 +4,11 @@ var app = express().use(json());
 var core = require("./core.js");
 var logic = require("./logic.js");
 var roster = require("./roster.js");
+var gameLoader = require("./game_loader.js");
 var games = [];
 
 app.get('/game/:id/board', function (req, res) {
-	game = findGame(req);
+	game = gameLoader.findGame(req);
 	if (!game) {
 		res.json({'error' : 'No game found'});
 		return;
@@ -30,6 +31,11 @@ app.get('/game/new', function (req, res) {
 	res.json(game);
 });
 
+app.get('/game/play', function (req, res) {
+	game = gameLoader.play(req);
+	res.json(game);
+})
+
 app.get('/account/new', function (req, res) {
 	account = {};
 	account = roster.registerAccount(account, req);
@@ -43,13 +49,3 @@ var server = app.listen(3000, function () {
   console.log('Quantum Productions Game server listening at http://%s:%s', host, port);
 });
 
-findGame = function(req) {
-	var game_id = parseInt(req.params.id);
-	if (game_id <= games.length) {
-		var game = games[game_id-1];
-		game.error = null;
-		return game;
-	}
-
-	return {'error' : 'Game not found'};
-};

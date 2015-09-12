@@ -12,6 +12,14 @@ registerAccount = function(account, req) {
 	return account;
 };
 
+findAccount = function(req) {
+	if (accounts[req.query.name])) {
+		return accounts[req.query.name];
+	}
+
+	return null;
+}
+
 module.exports = {
 	"registerAccount": registerAccount,
 	"accounts" : accounts
