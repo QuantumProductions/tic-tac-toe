@@ -31,7 +31,11 @@ play = function(req) {
 }
 
 openToPlayer = function(game, account) {
+	if (game.players.length < 2) {
+		return true;
+	}
 
+	return false;
 }
 
 startGame = function(game, account) {
