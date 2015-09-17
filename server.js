@@ -19,7 +19,7 @@ app.get('/game/:id/board', function (req, res) {
 });
 
 app.get('/game/:id/move', function (req, res) {
-	game = findGame(req);
+	game = gameLoader.findGame(req);
 	game = core.move(game, req);
 	res.json(game);
 });

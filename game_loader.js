@@ -23,13 +23,13 @@ var play = function(req) {
 
 	var game = {};
 
-	// for (var i = 0; i < games.length; i++) {
-	// 	game = games[i];
-	// 	if (openToPlayer(game, account)) {
-	// 		game = enterPlayer(game, account);
-	// 		return game;
-	// 	}
-	// }
+	for (var i = 0; i < games.length; i++) {
+		game = games[i];
+		if (openToPlayer(game, account)) {
+			game = enterPlayer(game, account);
+			return game;
+		}
+	}
 
 	game = startGame(game, account, req);
 	console.log("board" + game.board);
@@ -43,6 +43,11 @@ var openToPlayer = function(game, account) {
 	}
 
 	return false;
+}
+
+var enterPlayer = function(game, account) {
+	console.log("assign player");
+	return game;
 }
 
 var startGame = function(game, account, req) {
