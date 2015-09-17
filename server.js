@@ -15,6 +15,7 @@ app.get('/game/:id/board', function (req, res) {
 	}
 
 	res.json(game.board);
+	//superceded by /game/status.. include error from gameLoader instead of if (!game);
 });
 
 app.get('/game/:id/move', function (req, res) {
@@ -24,6 +25,8 @@ app.get('/game/:id/move', function (req, res) {
 });
 
 app.get('/game/new', function (req, res) {
+	//server.new?
+	//superceded by game/play
 	game = {};
 	game = logic.setupGame(game, req.query);
 	game.game_id = games.length + 1;

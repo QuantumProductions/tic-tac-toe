@@ -39,7 +39,7 @@ openToPlayer = function(game, account) {
 }
 
 startGame = function(game, account) {
-	
+	//replace setupgame
 }
 
 module.exports = {

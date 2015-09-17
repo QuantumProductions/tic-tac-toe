@@ -14,6 +14,10 @@ function setupClient(client) {
 	}
 
 	client.processClick = function(x, y) {
+		//server.move({game_id:})
+		//server.move[0](game_id...)
+		//server.move[1](game_id...)
+		//server.move[client.offlineOrOnlineServerId](params);
 		var url = client.base_url;
 		url = url + "/game/" + game.game_id;
 		url = url + "/move?player=" + client.player + "&x=" + x + "&y=" + y;

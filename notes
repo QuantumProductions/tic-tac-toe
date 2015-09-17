@@ -1,0 +1,15 @@
+p1 = server.register(req)
+p2 = server.register(req)
+
+game = server.play(req)
+game = server.play(req{p2}) //this looks hacky
+
+game = server.move(req);
+
+games = server.findGames{(req)
+gameLoader.games()
+;
+
+server.
+
+wrap
