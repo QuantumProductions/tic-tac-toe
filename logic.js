@@ -1,4 +1,4 @@
-setupGame = function(game, query){
+var setupGame = function(game, query){
 	game.current_player = "X";
 	game.players = {'X':'X', 'O':'O'}
 	game.board = [[' ', ' ', ' '],
@@ -74,8 +74,13 @@ var evaluateResolution = function(game) {
  	console.log("winner: " + game.winner);
 }
 
+var loadPiece = function(game, req) {
+	return game.players[req.query.player];
+}
+
 module.exports = {
 	"setupGame": setupGame,
 	"cyclePlayers": cyclePlayers,
 	"evaluateResolution": evaluateResolution,
+	"loadPiece" : loadPiece
 };

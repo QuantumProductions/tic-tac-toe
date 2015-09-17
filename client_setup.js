@@ -5,9 +5,10 @@ function setupClient(client) {
 
 	client.startNewGame = function() {
 		http.get({
-	    url: "http://localhost:3000/game/new",
+	    url: "http://localhost:3000/game/play?name=xyz",
 	    onload: function() { 
 	    	game = JSON.parse(this.responseText);
+	    	alert(game.board);
 	    	installRendering(client);
 	    }
 		});

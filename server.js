@@ -20,17 +20,7 @@ app.get('/game/:id/board', function (req, res) {
 
 app.get('/game/:id/move', function (req, res) {
 	game = findGame(req);
-	game = core.move(game, req.query);
-	res.json(game);
-});
-
-app.get('/game/new', function (req, res) {
-	//server.new?
-	//superceded by game/play
-	game = {};
-	game = logic.setupGame(game, req.query);
-	game.game_id = games.length + 1;
-	games.push(game);
+	game = core.move(game, req);
 	res.json(game);
 });
 

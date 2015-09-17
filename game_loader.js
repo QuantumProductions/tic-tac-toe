@@ -1,8 +1,11 @@
-var roster = require("./roster.js");
+var roster = require('./roster.js');
+var logic = require('./logic.js');
 var games = [];
 
-findGame = function(req) {
+var findGame = function(req) {
 	var game_id = parseInt(req.params.id);
+	console.log("game id" + game_id);
+	console.log("games" + games);
 	if (game_id <= games.length) {
 		var game = games[game_id-1];
 		game.error = null;
@@ -12,25 +15,29 @@ findGame = function(req) {
 	return {'error' : 'Game not found'};
 };
 
-play = function(req) {
+var play = function(req) {
 	account = roster.findAccount(req);
 	if (account.error) {
 		return {'error' : account.error };
 	}
 
-	for (var i = 0; i < games.length; i++) {
-		var game = games[i];
-		if (openToPlayer(game, account)) {
-			game = enterPlayer(game, account);
-			return game;
-		}
-	} 
+	var game = {};
 
-	game = startGame(account);
+	// for (var i = 0; i < games.length; i++) {
+	// 	game = games[i];
+	// 	if (openToPlayer(game, account)) {
+	// 		game = enterPlayer(game, account);
+	// 		return game;
+	// 	}
+	// }
+
+	game = startGame(game, account, req);
+	console.log("board" + game.board);
+	game = enterPlayer(game, account);
 	return game;
 }
 
-openToPlayer = function(game, account) {
+var openToPlayer = function(game, account) {
 	if (game.players.length < 2) {
 		return true;
 	}
@@ -38,10 +45,12 @@ openToPlayer = function(game, account) {
 	return false;
 }
 
-startGame = function(game, account) {
-	//replace setupgame
+var startGame = function(game, account, req) {
+	game = logic.setupGame(game, req);
+	return game;
 }
 
 module.exports = {
-	"findGame": findGame
+	"findGame": findGame,
+	"play" : play
 };

@@ -1,6 +1,6 @@
 var accounts = {};
 
-registerAccount = function(account, req) {
+var registerAccount = function(account, req) {
 	var name = req.query.name;
 	if (accounts[name] === undefined) {
 		account.name = name;
@@ -12,15 +12,16 @@ registerAccount = function(account, req) {
 	return account;
 };
 
-findAccount = function(req) {
-	if (accounts[req.query.name])) {
+var findAccount = function(req) {
+	if (accounts[req.query.name]) {
 		return accounts[req.query.name];
 	}
 
-	return null;
+	return {'error' : 'Account not found'};
 }
 
 module.exports = {
 	"registerAccount": registerAccount,
+	"findAccount" : findAccount,
 	"accounts" : accounts
 };
