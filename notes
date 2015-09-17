@@ -10,6 +10,14 @@ games = server.findGames{(req)
 gameLoader.games()
 ;
 
-server.
+API calls wrap server inside them
 
-wrap
+object = server.relevantFunction
+res.json(object);
+
+Clicking to move:
+ *should send the message to the local server object, which updates the game and returns a JSON
+ *should send the message to the remote server, which passes to its local server object, which updates the game and returns a JSON
+ *local move updates the game from JSON
+ *remote move updates the game from JSON
+ *local move updates the game from remote's local JSON
