@@ -8,18 +8,18 @@ var gameLoader = require("./game_loader.js");
 var games = [];
 
 app.get('/game/:id/status', function (req, res) {
-	game = gameLoader.findGame(req);
+	game = gameLoader.findGame(req); //server.findGame
 	res.json(game);
 });
 
 app.get('/game/:id/move', function (req, res) {
-	game = gameLoader.findGame(req);
+	game = gameLoader.findGame(req);  //server.move
 	game = core.move(game, req);
 	res.json(game);
 });
 
 app.get('/game/play', function (req, res) {
-	game = gameLoader.play(req);
+	game = gameLoader.play(req); //server.play
 	res.json(game);
 })
 
