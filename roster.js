@@ -4,6 +4,7 @@ var registerAccount = function(account, req) {
 	var name = req.query.name;
 	if (accounts[name] === undefined) {
 		account.name = name;
+		account.id = Object.keys(accounts).length + 1;
 		accounts[name] = account;
 	} else {
 		account.error = "Account exists with that name.";
