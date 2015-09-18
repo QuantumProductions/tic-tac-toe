@@ -1,14 +1,23 @@
 function setupClient(client) {
 	client.base_url = "http://localhost:3000";
 
-	client.player = "X";
+	client.name = 'xyz';
 
 	client.startNewGame = function() {
 		http.get({
-	    url: "http://localhost:3000/game/play?name=xyz",
+	    url: "http://localhost:3000/game/play?name=" + client.name,
 	    onload: function() { 
 	    	game = JSON.parse(this.responseText);
-	    	alert(game.board);
+	    	client.players = game.players;
+	    	var players = Object.keys(game.players);
+	    	for (var i = 0; i < players.length; i++) {
+	    		var player = game.players[players[i]];
+	    		alert("account" + player.piece);
+	    		if (player.account_name === client.name) {
+	    			client.player = player.piece;
+	    			console.log("assigning player piece: " + client.player);
+	    		}
+	    	}
 	    	installRendering(client);
 	    }
 		});
@@ -27,7 +36,6 @@ function setupClient(client) {
 	    url: url,
 	    onload: function() { 
 	    	game = JSON.parse(this.responseText);
-	    	client.player = game.current_player;
 	    	if (game.winner != undefined) {
 	    		alert("Winner is " + game.winner);
 	    	} else if (game.error) {
@@ -45,7 +53,6 @@ function setupClient(client) {
 		    url: url,
 		    onload: function() { 
 		    	game = JSON.parse(this.responseText);
-		    	client.player = game.current_player;
 		    	if (game.winner != undefined) {
 		    		alert("Winner is " + game.winner);
 		    	} else if (game.error) {
