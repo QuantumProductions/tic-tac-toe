@@ -49,9 +49,9 @@ var openToPlayer = function(game, account) {
 
 var enterPlayer = function(game, account) {
 	if (game.players['X']) {
-		game.players['O'] = {'account_id' : account.id, 'piece' : 'O'};
+		game.players['O'] = {'account_name' : account.name, 'account_id' : account.id, 'piece' : 'O'};
 	} else {
-		game.players['X'] = {'account_id' : account.id, 'piece' : 'X'};
+		game.players['X'] = {'account_name' : account.name, 'account_id' : account.id, 'piece' : 'X'};
 	}
 	return game;
 }
