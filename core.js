@@ -7,6 +7,12 @@ var move = function(game, req) {
 	var player = req.query.player;
 	var x = req.query.x;
 	var y = req.query.y;
+
+	if (!game.players[game.current_player]) {
+		game.error = game.current_player + " has not joined yet.";
+		return game;
+	}
+
 	if (player != game.current_player) {
 		game.error = "Not your turn";
 		return game;
