@@ -75,7 +75,7 @@ var evaluateResolution = function(game) {
 }
 
 var loadPiece = function(game, req) {
-	return game.players[req.query.player];
+	return game.players[req.query.player].piece;
 }
 
 module.exports = {

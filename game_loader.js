@@ -40,7 +40,7 @@ var play = function(req) {
 }
 
 var openToPlayer = function(game, account) {
-	if (game.players.length < 2) {
+	if (Object.keys(game.dictionary).length) {
 		return true;
 	}
 
@@ -48,7 +48,11 @@ var openToPlayer = function(game, account) {
 }
 
 var enterPlayer = function(game, account) {
-	console.log("assign player");
+	if (game.players['X']) {
+		game.players['O'] = {'account_id' : account.id, 'piece' : 'O'};
+	} else {
+		game.players['X'] = {'account_id' : account.id, 'piece' : 'X'};
+	}
 	return game;
 }
 
