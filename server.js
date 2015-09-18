@@ -11,8 +11,7 @@ app.get('/game/:id/board', function (req, res) {
 	game = gameLoader.findGame(req);
 	if (!game) {
 		res.json({'error' : 'No game found'});
-		return;
-	}
+		return; 	}
 
 	res.json(game.board);
 	//superceded by /game/status.. include error from gameLoader instead of if (!game);

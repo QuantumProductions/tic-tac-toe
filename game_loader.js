@@ -32,8 +32,10 @@ var play = function(req) {
 	}
 
 	game = startGame(game, account, req);
-	console.log("board" + game.board);
 	game = enterPlayer(game, account);
+	game.game_id = games.length + 1;
+	games.push(game);
+
 	return game;
 }
 
