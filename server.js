@@ -7,14 +7,9 @@ var roster = require("./roster.js");
 var gameLoader = require("./game_loader.js");
 var games = [];
 
-app.get('/game/:id/board', function (req, res) {
+app.get('/game/:id/status', function (req, res) {
 	game = gameLoader.findGame(req);
-	if (!game) {
-		res.json({'error' : 'No game found'});
-		return; 	}
-
-	res.json(game.board);
-	//superceded by /game/status.. include error from gameLoader instead of if (!game);
+	res.json(game);
 });
 
 app.get('/game/:id/move', function (req, res) {

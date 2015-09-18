@@ -37,5 +37,24 @@ function setupClient(client) {
 		});
 	}
 
+	client.downloadGame = function() {
+		if (game && game.game_id) {
+			var url = client.base_url;
+			url = url + "/game/" + game.game_id + "/status";
+			http.get({
+		    url: url,
+		    onload: function() { 
+		    	game = JSON.parse(this.responseText);
+		    	client.player = game.current_player;
+		    	if (game.winner != undefined) {
+		    		alert("Winner is " + game.winner);
+		    	} else if (game.error) {
+		    		alert("Error: " + game.error);
+		    	}
+		    }
+			});
+		}
+	}
+
 	return client;
 }
