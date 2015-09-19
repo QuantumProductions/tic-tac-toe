@@ -54,6 +54,7 @@ function setupClient(client) {
 			http.get({
 		    url: url,
 		    onload: function() { 
+		    	console.log(this.responseText);
 		    	game = JSON.parse(this.responseText);
 		    	if (game.winner != undefined) {
 		    		alert("Winner is " + game.winner);
@@ -95,10 +96,12 @@ function setupClient(client) {
 	}
 
 	client.loadGames = function() {
-		if (!client.account) {
-			alert("Login required.");
-			return;
-		}
+		var node = document.getElementById('name');
+    if (!node.value) {
+    	alert("Enter player name.");
+    } //sign in and get account data
+    client.account = {'name' : node.value };
+
 		var url = client.base_url + "/account" + "/status?name=" + client.account.name; //use auth token
 		console.log("my url is " + url);
 
@@ -110,9 +113,8 @@ function setupClient(client) {
 		    		console.log("no games, starting new game");
 		    		client.startNewGame();
 		    	} else {
-		    		game = {'board' : []};
-		    		game_id = client.account.game_ids[0];
-		    		console.log("downloading game" + game_id);
+		    		game = {'board' : [], 'game_id' : client.account.game_ids[0]};
+		    		console.log("downloading game" + game.game_id);
 		    		client.downloadGame();
 		    	}
 		    }
