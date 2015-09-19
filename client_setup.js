@@ -1,8 +1,6 @@
 function setupClient(client) {
 	client.base_url = "http://localhost:3000";
 
-	client.name = 'xyz';
-
 	client.startNewGame = function() {
 		http.get({
 	    url: "http://localhost:3000/game/play?name=" + client.name,
@@ -61,6 +59,15 @@ function setupClient(client) {
 		    }
 			});
 		}
+	}
+
+	client.findGame = function() {
+    var node = document.getElementById('name');
+    if (!node.value) {
+    	alert("Enter player name.");
+    }
+    client.name = node.value;
+    client.startNewGame();
 	}
 
 	return client;
