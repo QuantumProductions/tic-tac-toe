@@ -2,15 +2,19 @@ function setupClient(client) {
 	client.base_url = "http://localhost:3000";
 
 	client.startNewGame = function() {
+		alert('client account name' + client.account.name);
 		http.get({
 	    url: "http://localhost:3000/game/play?name=" + client.account.name,
 	    onload: function() { 
 	    	game = JSON.parse(this.responseText);
 	    	client.players = game.players;
 	    	var players = Object.keys(game.players);
+	    	console.log("the players are numbered" + players.length);
 	    	for (var i = 0; i < players.length; i++) {
 	    		var player = game.players[players[i]];
-	    		if (player.account.name === client.name) {
+	    		console.log("player account name" + player.account.name);
+	    		console.log("player piece" + player.piece);
+	    		if (player.account.name === client.account.name) {
 	    			client.player = player.piece;
 	    			alert("You are: " + player.piece);
 	    			console.log("assigning player piece: " + client.player);

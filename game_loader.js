@@ -33,6 +33,8 @@ var play = function(req) {
 
 	game = {};
 	game = startGame(game, account, req);
+	var gamePlayers = Object.keys(game.players);
+	console.log("game started, players: " + gamePlayers.length);
 	game.game_id = games.length + 1;
 	game = enterPlayer(game, account);
 	console.log("game id: " + game.game_id);
