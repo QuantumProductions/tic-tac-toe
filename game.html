@@ -18,7 +18,6 @@ var client = {};
 
 <script type="text/javascript">
 client = setupClient(client);
-client.startNewGame();
 setInterval(client.downloadGame, 1000);
 
 
@@ -26,5 +25,6 @@ setInterval(client.downloadGame, 1000);
 <div>
 <input id='name'></input>
 <button onclick=client.findGame()>Play</button>
+<button onclick=client.register()>Register</button>
 </div>
 </html>

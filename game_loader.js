@@ -40,7 +40,7 @@ var play = function(req) {
 }
 
 var openToPlayer = function(game, account) {
-	if (Object.keys(game.dictionary).length) {
+	if (Object.keys(game.players).length) {
 		return true;
 	}
 

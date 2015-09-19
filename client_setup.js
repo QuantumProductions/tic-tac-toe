@@ -3,16 +3,16 @@ function setupClient(client) {
 
 	client.startNewGame = function() {
 		http.get({
-	    url: "http://localhost:3000/game/play?name=" + client.name,
+	    url: "http://localhost:3000/game/play?name=" + client.account.name,
 	    onload: function() { 
 	    	game = JSON.parse(this.responseText);
 	    	client.players = game.players;
 	    	var players = Object.keys(game.players);
 	    	for (var i = 0; i < players.length; i++) {
 	    		var player = game.players[players[i]];
-	    		alert("account" + player.piece);
 	    		if (player.account_name === client.name) {
 	    			client.player = player.piece;
+	    			alert("You are: " + player.piece);
 	    			console.log("assigning player piece: " + client.player);
 	    		}
 	    	}
@@ -68,6 +68,25 @@ function setupClient(client) {
     }
     client.name = node.value;
     client.startNewGame();
+	}
+
+	client.register = function() {
+		var node = document.getElementById('name');
+    if (!node.value) {
+    	alert("Enter player name.");
+    }
+    client.name = node.value;
+    var url = client.base_url + "/account/new?name=" + client.name;
+
+    	http.get({
+		    url: url,
+		    onload: function() { 
+		    	account = JSON.parse(this.responseText);
+		    	client.account = account;
+		    	console.log(client.account.name);
+		    	console.log(client.account.id)
+		    }
+			});
 	}
 
 	return client;
