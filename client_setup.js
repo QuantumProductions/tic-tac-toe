@@ -78,6 +78,7 @@ function setupClient(client) {
 		var node = document.getElementById('name');
     if (!node.value) {
     	alert("Enter player name.");
+    	return;
     }
     client.name = node.value;
     var url = client.base_url + "/account/new?name=" + client.name;
@@ -91,6 +92,32 @@ function setupClient(client) {
 		    	console.log(client.account.id)
 		    }
 			});
+	}
+
+	client.loadGames = function() {
+		if (!client.account) {
+			alert("Login required.");
+			return;
+		}
+		var url = client.base_url + "/account" + "/status?name=" + client.account.name; //use auth token
+		console.log("my url is " + url);
+
+		http.get({
+		    url: url,
+		    onload: function() { 
+		    	client.account = JSON.parse(this.responseText);
+		    	if (client.account.game_ids.length === 0) {
+		    		console.log("no games, starting new game");
+		    		client.startNewGame();
+		    	} else {
+		    		game = {'board' : []};
+		    		game_id = client.account.game_ids[0];
+		    		console.log("downloading game" + game_id);
+		    		client.downloadGame();
+		    	}
+		    }
+			});
+
 	}
 
 	return client;

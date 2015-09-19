@@ -29,6 +29,13 @@ app.get('/account/new', function (req, res) {
 	res.json(account);
 });
 
+app.get('/account/status', function (req, res) {
+	console.log("getting status");
+	account = roster.findAccount(req);
+	console.log("account status" + account.game_ids);
+	res.json(account);
+});
+
 var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;

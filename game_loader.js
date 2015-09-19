@@ -38,12 +38,23 @@ var play = function(req) {
 	game.game_id = games.length + 1;
 	game = enterPlayer(game, account);
 	console.log("game id: " + game.game_id);
+	linkGameToAccount(game, account);
+	console.log("account games_ids" + account.game_ids);
 	games.push(game);
 
 	return game;
 }
 
+var linkGameToAccount = function(game, account) {
+	if (!account.game_ids) {
+		account.game_ids = [];
+	}
+
+	account.game_ids.push(game.game_id);
+}
+
 var openToPlayer = function(game, account) {
+	//extract to logic
 	var playerKeys = Object.keys(game.players);
 	console.log("player keys" + playerKeys + "" + playerKeys.length);
 	if (playerKeys.length < 2) {
