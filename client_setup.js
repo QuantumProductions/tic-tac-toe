@@ -10,7 +10,7 @@ function setupClient(client) {
 	    	var players = Object.keys(game.players);
 	    	for (var i = 0; i < players.length; i++) {
 	    		var player = game.players[players[i]];
-	    		if (player.account_name === client.name) {
+	    		if (player.account.name === client.name) {
 	    			client.player = player.piece;
 	    			alert("You are: " + player.piece);
 	    			console.log("assigning player piece: " + client.player);
@@ -65,8 +65,8 @@ function setupClient(client) {
     var node = document.getElementById('name');
     if (!node.value) {
     	alert("Enter player name.");
-    }
-    client.name = node.value;
+    } //sign in and get account data
+    client.account = {'name' : node.value };
     client.startNewGame();
 	}
 

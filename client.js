@@ -10,7 +10,7 @@ function processMouseMove() {
 }
 
 function draw() {
-	if (game === null) {
+	if (!game || !game.board) {
 		return;
 	}
 
