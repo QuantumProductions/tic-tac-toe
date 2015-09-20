@@ -56,6 +56,7 @@ function setupClient(client) {
 		    onload: function() { 
 		    	console.log(this.responseText);
 		    	game = JSON.parse(this.responseText);
+		    	console.log('board' + game.board);
 		    	if (game.winner != undefined) {
 		    		alert("Winner is " + game.winner);
 		    	} else if (game.error) {
@@ -115,6 +116,7 @@ function setupClient(client) {
 		    	} else {
 		    		game = {'board' : [], 'game_id' : client.account.game_ids[0]};
 		    		console.log("downloading game" + game.game_id);
+		    		installRendering(client);
 		    		client.downloadGame();
 		    	}
 		    }

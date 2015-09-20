@@ -16,7 +16,7 @@ function draw() {
 
 	var i = 0;
 	var j = 0;
-
+	console.log("game board length" + game.board.length);
 	for (i = 0; i < game.board.length; i++) {
 		var row = game.board[i];
 		for (j = 0; j < row.length; j++) {
