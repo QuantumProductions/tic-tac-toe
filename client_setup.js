@@ -54,9 +54,7 @@ function setupClient(client) {
 			http.get({
 		    url: url,
 		    onload: function() { 
-		    	console.log(this.responseText);
 		    	game = JSON.parse(this.responseText);
-		    	console.log('board' + game.board);
 		    	if (game.winner != undefined) {
 		    		alert("Winner is " + game.winner);
 		    	} else if (game.error) {

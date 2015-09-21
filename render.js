@@ -14,6 +14,18 @@ function installRendering(client) {
 			'O': function(board, x, y, data) {
 				drawRect(x * renderW, y * renderW, renderW, renderW, "green");
 			},
-		}	
+		}
+
+	client.render_status = function(game) {
+		if (game.players.X) {
+			var node = document.getElementById('player-x');
+			node.innerText = "X: " + game.players.X.account.name;
+		}
+
+		if (game.players.O) {
+			var node = document.getElementById('player-o');
+			node.innerText = "O: " + game.players.O.account.name;
+		}
+	}
 }
 
