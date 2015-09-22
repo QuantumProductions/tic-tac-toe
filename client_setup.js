@@ -108,11 +108,13 @@ function setupClient(client) {
 		    url: url,
 		    onload: function() { 
 		    	client.account = JSON.parse(this.responseText);
+		    	alert("Game Ids" + client.account.game_ids);
 		    	if (client.account.game_ids.length === 0) {
 		    		console.log("no games, starting new game");
 		    		client.startNewGame();
 		    	} else {
 		    		game = {'board' : [], 'game_id' : client.account.game_ids[0]};
+		    		client.game_index = 0;
 		    		console.log("downloading game" + game.game_id);
 		    		installRendering(client);
 		    		client.downloadGame();
@@ -120,6 +122,20 @@ function setupClient(client) {
 		    }
 			});
 
+	}
+
+	client.cycleGame = function() {
+		if (!client.account) {
+			alert("Sign in.");
+			return;
+		}
+
+		client.game_index++;
+		if (client.game_index >= client.account.game_ids.length) {
+			client.game_index = 0;
+			game.game_id = client.account.game_ids[client.game_index];
+			client.downloadGame();
+		}
 	}
 
 	return client;
