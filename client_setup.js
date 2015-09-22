@@ -55,6 +55,15 @@ function setupClient(client) {
 		    url: url,
 		    onload: function() { 
 		    	game = JSON.parse(this.responseText);
+ 					client.players = game.players;
+        	var players = Object.keys(game.players);
+					for (var i = 0; i < players.length; i++) {
+		    		var player = game.players[players[i]];
+		    		if (player.account.name === client.account.name) {
+		    			client.player = player.piece;
+		    		}
+	    		}
+
 		    	if (game.winner != undefined) {
 		    		alert("Winner is " + game.winner);
 		    	} else if (game.error) {
@@ -70,7 +79,12 @@ function setupClient(client) {
     if (!node.value) {
     	alert("Enter player name.");
     } //sign in and get account data
-    client.account = {'name' : node.value };
+    if (!client.account) {
+    	client.account = {'name' : node.value };	
+    } else {
+    	client.account.name = node.value;
+    }
+    
     client.startNewGame();
 	}
 
@@ -131,11 +145,13 @@ function setupClient(client) {
 		}
 
 		client.game_index++;
+		console.log("client.account.game_ids" + client.account.game_ids);
 		if (client.game_index >= client.account.game_ids.length) {
 			client.game_index = 0;
-			game.game_id = client.account.game_ids[client.game_index];
-			client.downloadGame();
 		}
+		game.game_id = client.account.game_ids[client.game_index];
+		console.log("Downloading game_id" + game.game_id);
+		client.downloadGame();
 	}
 
 	return client;

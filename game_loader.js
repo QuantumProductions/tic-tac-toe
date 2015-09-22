@@ -27,6 +27,7 @@ var play = function(req) {
 		game = games[i];
 		if (openToPlayer(game, account)) {
 			game = enterPlayer(game, account);
+			linkGameToAccount(game, account);
 			return game;
 		}
 	}
