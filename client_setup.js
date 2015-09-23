@@ -1,7 +1,9 @@
 function setupClient(client) {
 	client.base_url = "http://localhost:3000";
 
-	client.startNewGame = function() {
+	installRendering(client);
+
+	client.findGame = function() {
 		alert('client account name' + client.account.name);
 		http.get({
 	    url: "http://localhost:3000/game/play?name=" + client.account.name,
@@ -20,7 +22,6 @@ function setupClient(client) {
 	    			console.log("assigning player piece: " + client.player);
 	    		}
 	    	}
-	    	installRendering(client);
 	    }
 		});
 	}
@@ -42,6 +43,9 @@ function setupClient(client) {
 	    		alert("Winner is " + game.winner);
 	    	} else if (game.error) {
 	    		alert("Error: " + game.error);
+	    	} else {
+	    		//callback for cycling
+	    		//client.cycleGame();
 	    	}
 	    }
 		});
@@ -74,19 +78,19 @@ function setupClient(client) {
 		}
 	}
 
-	client.findGame = function() {
-    var node = document.getElementById('name');
-    if (!node.value) {
-    	alert("Enter player name.");
-    } //sign in and get account data
-    if (!client.account) {
-    	client.account = {'name' : node.value };	
-    } else {
-    	client.account.name = node.value;
-    }
+	// client.findGame = function() {
+ //    var node = document.getElementById('name');
+ //    if (!node.value) {
+ //    	alert("Enter player name.");
+ //    } //sign in and get account data
+ //    if (!client.account) {
+ //    	client.account = {'name' : node.value };	
+ //    } else {
+ //    	client.account.name = node.value;
+ //    }
     
-    client.startNewGame();
-	}
+ //    client.startNewGame();
+	// }
 
 	client.register = function() {
 		var node = document.getElementById('name');
@@ -104,38 +108,47 @@ function setupClient(client) {
 		    	client.account = account;
 		    	console.log(client.account.name);
 		    	console.log(client.account.id)
+		    	client.loadGames();
 		    }
 			});
 	}
 
-	client.loadGames = function() {
+	client.loadGames = function() { //stub for initial
+		//stub for load games success, callback
 		var node = document.getElementById('name');
     if (!node.value) {
     	alert("Enter player name.");
     } //sign in and get account data
+
     client.account = {'name' : node.value };
 
-		var url = client.base_url + "/account" + "/status?name=" + client.account.name; //use auth token
+ 		var url = client.base_url + "/account" + "/status?name=" + client.account.name; //use auth token
 		console.log("my url is " + url);
 
 		http.get({
 		    url: url,
-		    onload: function() { 
+		    onload: function() {  //this function could be a callback
 		    	client.account = JSON.parse(this.responseText);
 		    	alert("Game Ids" + client.account.game_ids);
+
+		    	var node = document.getElementById('register');
+		    	node.style.visibility = 'hidden';
+		    	node = document.getElementById('new_game');
+		    	node.style.visibility = 'visible';
+					node = document.getElementById('cycle');
+		    	node.style.visibility = 'visible';
+
 		    	if (client.account.game_ids.length === 0) {
-		    		console.log("no games, starting new game");
-		    		client.startNewGame();
+		    		console.log("no games, finding game");
+		    		client.findGame();
 		    	} else {
 		    		game = {'board' : [], 'game_id' : client.account.game_ids[0]};
 		    		client.game_index = 0;
 		    		console.log("downloading game" + game.game_id);
-		    		installRendering(client);
 		    		client.downloadGame();
 		    	}
 		    }
 			});
-
 	}
 
 	client.cycleGame = function() {

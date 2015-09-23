@@ -17,6 +17,7 @@ var move = function(game, req) {
 		game.error = "Not your turn";
 		return game;
 	}
+	//ensure within board bounds
 	var piece = logic.loadPiece(game, req);
 	var targetPiece = game.board[y][x];
 	var pieceFunction = game.pieces[targetPiece];
