@@ -53,6 +53,7 @@ function setupClient(client) {
 	}
 
 	client.downloadGame = function() {
+		//load game, render
 		if (game && game.game_id) {
 			var url = client.base_url;
 			url = url + "/game/" + game.game_id + "/status";
@@ -62,6 +63,9 @@ function setupClient(client) {
 		    	game = JSON.parse(this.responseText);
  					client.players = game.players;
  					client.loadPlayersForGame(game);
+ 					//render call
+ 					var node = document.getElementById('turn');
+ 					node.innerText = game.current_player + "'s turn";
 
      //    	var players = Object.keys(game.players);
 					// for (var i = 0; i < players.length; i++) {
@@ -71,6 +75,7 @@ function setupClient(client) {
 		   //  		}
 	    // 		}
 
+	    		//resolution call
 		    	if (game.winner != undefined) {
 		    		alert("Winner is " + game.winner);
 		    	} else if (game.error) {
