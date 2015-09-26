@@ -154,7 +154,7 @@ function setupClient(client) {
 		    		if (client.new_game_id) {
 		    			game_id = client.new_game_id;
 		    			client.new_game_id = null;
-		    			client.game_index = client.account.game_ids.length;
+		    			client.game_index = client.account.game_ids.length - 1;
 		    		}
 		    		alert("Game_id" + game_id);
 		    		game = {'board' : [], 'game_id' : game_id};
@@ -172,7 +172,6 @@ function setupClient(client) {
 			return;
 		}
 
-		client.game_index++;
 		console.log("client.account.game_ids" + client.account.game_ids);
 		if (client.game_index >= client.account.game_ids.length) {
 			client.game_index = 0;
@@ -180,6 +179,7 @@ function setupClient(client) {
 		game.game_id = client.account.game_ids[client.game_index];
 		console.log("Downloading game_id" + game.game_id);
 		client.downloadGame();
+		client.game_index++;
 	}
 
 	return client;
