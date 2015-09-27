@@ -78,6 +78,11 @@ var loadPiece = function(game, req) {
 	return game.players[req.query.player].piece;
 }
 
+var announceMove = function(game, req) {
+	//load player IDs
+	//load their accounts & announce to each account that the game is ready
+}
+
 module.exports = {
 	"setupGame": setupGame,
 	"cyclePlayers": cyclePlayers,
