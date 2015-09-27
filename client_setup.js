@@ -41,12 +41,22 @@ function setupClient(client) {
 	    onload: function() { 
 	    	game = JSON.parse(this.responseText);
 	    	if (game.winner != undefined) {
-	    		alert("Winner is " + game.winner);
+	    		//assignWinner
 	    	} else if (game.error) {
 	    		alert("Error: " + game.error);
 	    	} else {
 	    		//callback for cycling
 	    		//client.cycleGame();
+	    		var i = 0;
+	    		for (i = 0; i < client.account.announceGameIds.length; i++) {
+	    			var game = client.account.announceGameIds[i];
+	    			if (game.game_id === client.game_id) {
+	    				client.account.announceGameIds.splice(i, 1);
+	    				break;
+	    			}
+	    		}
+
+	    		client.shouldLoadGames = true;
 	    	}
 	    }
 		});
@@ -77,7 +87,7 @@ function setupClient(client) {
 
 	    		//resolution call
 		    	if (game.winner != undefined) {
-		    		alert("Winner is " + game.winner);
+		    		//show winner
 		    	} else if (game.error) {
 		    		alert("Error: " + game.error);
 		    	}
@@ -177,6 +187,17 @@ function setupClient(client) {
 			return;
 		}
 
+		var announceGameIds = client.account.announceGameIds;
+		if (announceGameIds && announceGameIds.length > 0) {
+			game_id = announceGameIds[0];
+		}
+
+		if (client.new_game_id) {
+			game_id = client.new_game_id;
+			client.new_game_id = null;
+			client.game_index = client.account.game_ids.length - 1;
+		}
+
 		console.log("client.account.game_ids" + client.account.game_ids);
 		if (client.game_index >= client.account.game_ids.length) {
 			client.game_index = 0;
@@ -185,6 +206,11 @@ function setupClient(client) {
 		console.log("Downloading game_id" + game.game_id);
 		client.downloadGame();
 		client.game_index++;
+
+		if (client.shouldLoadGames) {
+			client.loadGames();
+			client.shouldLoadGames = false;
+		}
 	}
 
 	return client;
