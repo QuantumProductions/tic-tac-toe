@@ -79,13 +79,71 @@ var loadPiece = function(game, req) {
 }
 
 var announceMove = function(game, req) {
-	//load player IDs
-	//load their accounts & announce to each account that the game is ready
+	//console.log("Object.keys(req.player)" + Object.keys(req.player));
+
+	var accountIds = [];
+	var i = 0;
+	//console.log("announcing move" + game.players.length);
+
+  var gamePlayers = Object.keys(game.players);
+
+	for (i = 0; i < gamePlayers.length; i++) {
+		var player = game.players[gamePlayers[i]];
+		console.log("player piece" + player.piece);
+		console.log("req.query.player" + req.query.player);
+	  if (player.piece === req.query.player) {
+			removeGameFromAnnounce(game, player);
+		} else {
+			addGameToAnnounce(game, player);
+		}
+	}
+}
+
+var removeGameFromAnnounce = function(game, player) {
+	var accountName = player.account.name;
+	var announceGameIds = player.account.announceGameIds;
+	if (announceGameIds) {
+		var j = 0;
+		for (j = 0; j < announceGameIds.length; j++) {
+			var gameId = announceGameIds[j];
+			if (gameId === game.game_id) {
+				announceGameIds.splice(j, 1);
+				console.log("REMOVING");
+				player.account.announceGameIds = announceGameIds;
+				console.log(player.account.announceGameIds);
+				console.log(player.account.name);
+				return;
+			}
+		}
+	}
+}
+
+var addGameToAnnounce = function(game, player) {
+	var accountName = player.account.name;
+	var announceGameIds = player.account.announceGameIds;		
+	console.log("Adding announce FOR "+ accountName + "to their announceIds" + announceGameIds);
+	console.log("game id" + game.game_id);
+	if (announceGameIds) {
+		var j = 0;
+		var exists = false;
+		for (j = 0; j < announceGameIds.length; j++) {
+			var gameId = announceGameIds[j];
+			if (gameId === game.game_id) {
+				exists = true;
+				break;
+			}
+		}
+		if (!exists) {
+			announceGameIds.push(game.game_id);
+			player.account.announceGameIds = announceGameIds;
+		}
+	}
 }
 
 module.exports = {
 	"setupGame": setupGame,
 	"cyclePlayers": cyclePlayers,
 	"evaluateResolution": evaluateResolution,
-	"loadPiece" : loadPiece
+	"loadPiece" : loadPiece,
+	"announceMove" : announceMove
 };

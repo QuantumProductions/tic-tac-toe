@@ -7,6 +7,7 @@ var registerAccount = function(account, req) {
 		account.id = Object.keys(accounts).length + 1;
 		account.game_ids = [];
 		accounts[name] = account;
+		account.announceGameIds = [];
 	} else {
 		account.error = "Account exists with that name.";
 	}
