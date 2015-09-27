@@ -79,11 +79,8 @@ var loadPiece = function(game, req) {
 }
 
 var announceMove = function(game, req) {
-	//console.log("Object.keys(req.player)" + Object.keys(req.player));
-
 	var accountIds = [];
 	var i = 0;
-	//console.log("announcing move" + game.players.length);
 
   var gamePlayers = Object.keys(game.players);
 
