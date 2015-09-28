@@ -45,18 +45,8 @@ function setupClient(client) {
 	    	} else if (game.error) {
 	    		alert("Error: " + game.error);
 	    	} else {
-	    		//callback for cycling
-	    		//client.cycleGame();
-	    		var i = 0;
-	    		for (i = 0; i < client.account.announceGameIds.length; i++) {
-	    			var game = client.account.announceGameIds[i];
-	    			if (game.game_id === client.game_id) {
-	    				client.account.announceGameIds.splice(i, 1);
-	    				break;
-	    			}
-	    		}
-
-	    		client.shouldLoadGames = true;
+					var node = document.getElementById('cycle');
+		    	node.style.visibility = 'visible';	    		
 	    	}
 	    }
 		});
@@ -152,8 +142,6 @@ function setupClient(client) {
 		    	var node = document.getElementById('register');
 		    	node.style.visibility = 'hidden';
 		    	node = document.getElementById('new_game');
-		    	node.style.visibility = 'visible';
-					node = document.getElementById('cycle');
 		    	node.style.visibility = 'visible';
 
 		    	if (client.account.game_ids.length === 0) {
