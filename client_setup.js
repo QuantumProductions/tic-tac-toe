@@ -149,10 +149,6 @@ function setupClient(client) {
 		    		client.findGame();
 		    	} else {
 		    		var game_id = client.account.game_ids[0];
-		    		var announceGameIds = client.account.announceGameIds;
-		    		if (announceGameIds && announceGameIds.length > 0) {
-		    			game_id = announceGameIds[0];
-		    		}
 
 		    		if (client.new_game_id) {
 		    			game_id = client.new_game_id;
@@ -173,11 +169,6 @@ function setupClient(client) {
 		if (!client.account) {
 			alert("Sign in.");
 			return;
-		}
-
-		var announceGameIds = client.account.announceGameIds;
-		if (announceGameIds && announceGameIds.length > 0) {
-			game_id = announceGameIds[0];
 		}
 
 		if (client.new_game_id) {
