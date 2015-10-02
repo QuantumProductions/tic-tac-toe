@@ -67,6 +67,9 @@ function setupClient(client) {
  					var node = document.getElementById('turn');
  					node.innerText = game.current_player + "'s turn";
 
+					node = document.getElementById('game-id');
+ 					node.innerText = "Game ID " + game.game_id;
+
      //    	var players = Object.keys(game.players);
 					// for (var i = 0; i < players.length; i++) {
 		   //  		var player = game.players[players[i]];
