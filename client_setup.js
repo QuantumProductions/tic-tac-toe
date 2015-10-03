@@ -21,7 +21,7 @@ function setupClient(client) {
 	    	game = JSON.parse(this.responseText);
 	    	client.players = game.players;
 	    	client.new_game_id = game.game_id;
-	    	client.loadGames();
+	    	//client.loadGames();
 //	    	client.loadPlayersForGame(game);
 	    }
 		});
@@ -144,9 +144,7 @@ function setupClient(client) {
 
 		    	var node = document.getElementById('register');
 		    	node.style.visibility = 'hidden';
-		    	node = document.getElementById('new_game');
-		    	node.style.visibility = 'visible';
-
+		    	
 		    	if (client.account.game_ids.length === 0) {
 		    		console.log("no games, finding game");
 		    		client.findGame();
