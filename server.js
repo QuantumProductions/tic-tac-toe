@@ -20,6 +20,12 @@ app.get('/game/:id/move', function (req, res) {
 
 app.get('/game/play', function (req, res) {
 	game = gameLoader.play(req); //server.play
+	//load any game.
+	res.json(game);
+})
+
+app.get('/game/load', function (req, res) {
+	game = gameLoader.findGame(req); //server.load -- load a specific game
 	res.json(game);
 })
 
