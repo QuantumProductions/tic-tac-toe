@@ -174,25 +174,8 @@ function setupClient(client) {
 			return;
 		}
 
-		if (client.new_game_id) {
-			game_id = client.new_game_id;
-			client.new_game_id = null;
-			client.game_index = client.account.game_ids.length - 1;
-		}
-
-		console.log("client.account.game_ids" + client.account.game_ids);
-		if (client.game_index >= client.account.game_ids.length) {
-			client.game_index = 0;
-		}
-		game.game_id = client.account.game_ids[client.game_index];
-		console.log("Downloading game_id" + game.game_id);
-		client.downloadGame();
-		client.game_index++;
-
-		if (client.shouldLoadGames) {
-			client.loadGames();
-			client.shouldLoadGames = false;
-		}
+		client.findGame();
+		return;
 	}
 
 	return client;
