@@ -21,8 +21,6 @@ function setupClient(client) {
 	    	game = JSON.parse(this.responseText);
 	    	client.players = game.players;
 	    	client.new_game_id = game.game_id;
-	    	//client.loadGames();
-//	    	client.loadPlayersForGame(game);
 	    }
 		});
 	}
@@ -70,14 +68,6 @@ function setupClient(client) {
 					node = document.getElementById('game-id');
  					node.innerText = "Game ID " + game.game_id;
 
-     //    	var players = Object.keys(game.players);
-					// for (var i = 0; i < players.length; i++) {
-		   //  		var player = game.players[players[i]];
-		   //  		if (player.account.name === client.account.name) {
-		   //  			client.player = player.piece;
-		   //  		}
-	    // 		}
-
 	    		//resolution call
 		    	if (game.winner != undefined) {
 		    		//show winner
@@ -88,20 +78,6 @@ function setupClient(client) {
 			});
 		}
 	}
-
-	// client.findGame = function() {
- //    var node = document.getElementById('name');
- //    if (!node.value) {
- //    	alert("Enter player name.");
- //    } //sign in and get account data
- //    if (!client.account) {
- //    	client.account = {'name' : node.value };	
- //    } else {
- //    	client.account.name = node.value;
- //    }
-    
- //    client.startNewGame();
-	// }
 
 	client.register = function() {
 		var node = document.getElementById('name');
