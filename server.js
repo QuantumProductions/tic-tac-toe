@@ -7,11 +7,6 @@ var roster = require("./roster.js");
 var gameLoader = require("./game_loader.js");
 var games = [];
 
-app.get('/game/:id/status', function (req, res) {
-	game = gameLoader.findGame(req); //server.findGame
-	res.json(game);
-});
-
 app.get('/game/:id/move', function (req, res) {
 	game = gameLoader.findGame(req);  //server.move
 	game = core.move(game, req);
@@ -20,6 +15,7 @@ app.get('/game/:id/move', function (req, res) {
 
 app.get('/game/play', function (req, res) {
 	game = gameLoader.play(req); //server.play
+	//game
 	//load any game.
 	res.json(game);
 })

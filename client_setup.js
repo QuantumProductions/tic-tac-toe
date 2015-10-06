@@ -54,7 +54,7 @@ function setupClient(client) {
 		//load game, render
 		if (game && game.game_id) {
 			var url = client.base_url;
-			url = url + "/game/" + game.game_id + "/status";
+			url = url + "/game/load?game_id=" + game.game_id;
 			http.get({
 		    url: url,
 		    onload: function() { 
