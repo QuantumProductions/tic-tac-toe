@@ -32,9 +32,9 @@ var move = function(game, req) {
 	if (game.error) {
 		return game;
 	} else {
-		logic.announceMove(game, req);
-		logic.evaluateResolution(game);
-		logic.cyclePlayers(game);
+		announceMove(game, req);
+		evaluateResolution(game);
+		cyclePlayers(game);
 	}
 
 	return game;
