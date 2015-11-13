@@ -7,6 +7,8 @@ var roster = require("./roster.js");
 var gameLoader = require("./game_loader.js");
 var games = [];
 
+if (app != undefined && app != null) {}
+
 app.get('/game/:id/move', function (req, res) {
 	game = gameLoader.findGame(req);  //server.move
 	game = core.move(game, req);

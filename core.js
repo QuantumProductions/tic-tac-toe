@@ -9,6 +9,8 @@ var move = function(game, req) {
 	var y = req.query.y;
 
 	if (!game.players[game.current_player]) {
+		console.log("game.current_player" + game.current_player);
+		console.log(game.players);
 		game.error = game.current_player + " has not joined yet.";
 		return game;
 	}
@@ -18,7 +20,7 @@ var move = function(game, req) {
 		return game;
 	}
 	//ensure within board bounds
-	var piece = logic.loadPiece(game, req);
+	var piece = loadPiece(game, req);
 	var targetPiece = game.board[y][x];
 	var pieceFunction = game.pieces[targetPiece];
 	pieceFunction(game.board, piece, x, y, null);

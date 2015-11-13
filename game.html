@@ -12,14 +12,31 @@ var client = {};
 <script src="draw.js" type="text/javascript"></script>
 <script src="core.js" type="text/javascript"></script>
 <script src="render.js" type="text/javascript"></script>
-<script src="logic.js" type="text/javascript"></script>
 <script src="http.min.js" type="text/javascript"></script>
+<script src="logic.js" type="text/javascript"></script>
 <script src="client_setup.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 client = setupClient(client);
-setInterval(client.downloadGame, 1000);
+game = {}
+//game.players = {"X" : {"name" : "foo"}, "Y" : {"name" : "bar"}};
+game.players = {};
+game.players["X"] = {"account" : {"name" : "foo"}, "piece" : "X"};
+game.players["Y"] = {"account" : {"name" : "bar"}, "piece" : "Y"};
+console.log(game.players["X"]);
+game.current_player = "X";
+console.log(game.current_player);
 
+game = setupGame(game);
+game.players["X"] = {"account" : {"name" : "foo"}, "piece" : "X"};
+game.players["Y"] = {"account" : {"name" : "bar"}, "piece" : "Y"};
+
+
+// game.players = {"X" : , "Y" : {"account" : {"name" : "bar"}, "piece" : "O"}};
+
+
+//setInterval(client.downloadGame, 1000);
+evaluateResolution(game);
 
 </script>
 <div>

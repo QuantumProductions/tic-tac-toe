@@ -25,11 +25,18 @@ function setupClient(client) {
 		});
 	}
 
-	client.processClick = function(x, y) {
+	client.processClick = function(game, x, y) {
 		//server.move({game_id:})
 		//server.move[0](game_id...)
 		//server.move[1](game_id...)
 		//server.move[client.offlineOrOnlineServerId](params);
+		req = {"query" : {"player" : game.current_player, "x" : x, "y" : y}};
+		game = move(game, req);
+		console.log(game.board[0]);
+		console.log(game.error);
+		game.error = null;
+		return game;	
+
 		var url = client.base_url;
 		url = url + "/game/" + game.game_id;
 		url = url + "/move?player=" + client.player + "&x=" + x + "&y=" + y;

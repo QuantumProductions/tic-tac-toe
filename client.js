@@ -1,8 +1,7 @@
 function processClick() {
 	var x = Math.floor(cursor.x / client.render_distances['tile_size']);
 	var y = Math.floor(cursor.y / client.render_distances['tile_size']);
-
-	client.processClick(x, y);
+	game = client.processClick(game, x, y);
 }
 
 function processMouseMove() {
