@@ -1,7 +1,24 @@
 function setupClient(client) {
 	client.base_url = "http://localhost:3000";
-
+	client.playLocal = false
 	installRendering(client);
+
+	client.playLocal = function() {
+		client.local = true;
+		game.players = {"X" : {"name" : "foo"}, "Y" : {"name" : "bar"}};
+		game.players = {};
+		game.players["X"] = {"account" : {"name" : "foo"}, "piece" : "X"};
+		game.players["O"] = {"account" : {"name" : "bar"}, "piece" : "O"};
+		console.log(game.players["X"]);
+		game.current_player = "X";
+		console.log(game.current_player);
+
+		game = setupGame(game);
+		game.players["X"] = {"account" : {"name" : "foo"}, "piece" : "X"};
+		game.players["O"] = {"account" : {"name" : "bar"}, "piece" : "O"};
+
+
+	}
 
 	client.loadPlayersForGame = function(game) {
 		var players = Object.keys(game.players);
@@ -26,16 +43,26 @@ function setupClient(client) {
 	}
 
 	client.processClick = function(game, x, y) {
+		if (client.playLocal) {
+				req = {"query" : {"player" : game.current_player, "x" : x, "y" : y}};
+				game = move(game, req);
+				if (game.error) {
+					alert(game.error);
+				}
+				game.error = null;
+				if (game.winner) {
+					alert("Winner: " + game.winner);
+				}
+				return game;
+		}
 		//server.move({game_id:})
 		//server.move[0](game_id...)
 		//server.move[1](game_id...)
 		//server.move[client.offlineOrOnlineServerId](params);
-		req = {"query" : {"player" : game.current_player, "x" : x, "y" : y}};
-		game = move(game, req);
-		console.log(game.board[0]);
-		console.log(game.error);
-		game.error = null;
-		return game;	
+		
+		// console.log(game.board[0]);
+		
+		// return game;	
 
 		var url = client.base_url;
 		url = url + "/game/" + game.game_id;

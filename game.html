@@ -19,24 +19,12 @@ var client = {};
 <script type="text/javascript">
 client = setupClient(client);
 game = {}
-//game.players = {"X" : {"name" : "foo"}, "Y" : {"name" : "bar"}};
-game.players = {};
-game.players["X"] = {"account" : {"name" : "foo"}, "piece" : "X"};
-game.players["O"] = {"account" : {"name" : "bar"}, "piece" : "O"};
-console.log(game.players["X"]);
-game.current_player = "X";
-console.log(game.current_player);
-
-game = setupGame(game);
-game.players["X"] = {"account" : {"name" : "foo"}, "piece" : "X"};
-game.players["O"] = {"account" : {"name" : "bar"}, "piece" : "O"};
-
 
 // game.players = {"X" : , "Y" : {"account" : {"name" : "bar"}, "piece" : "O"}};
 
 
 //setInterval(client.downloadGame, 1000);
-evaluateResolution(game);
+//evaluateResolution(game);
 
 </script>
 <div>
@@ -45,6 +33,7 @@ evaluateResolution(game);
 <button onclick=client.loadGames()>Load Games</button>
 <button style="visibility: hidden" id="new_game" onclick=client.findGame()>New Game</button>
 <button style="visibility: hidden" id="cycle" onclick=client.findGame()>Next Game</button>
+<button id="offline" onclick=client.playLocal()>Local Play</button>
 
 </div>
 <div id='turn'></div>

@@ -20,7 +20,7 @@ var move = function(game, req) {
 		return game;
 	}
 	//ensure within board bounds
-	var piece = loadPiece(game, req);
+	var piece = logic.loadPiece(game, req);
 	var targetPiece = game.board[y][x];
 	var pieceFunction = game.pieces[targetPiece];
 	pieceFunction(game.board, piece, x, y, null);
@@ -32,9 +32,9 @@ var move = function(game, req) {
 	if (game.error) {
 		return game;
 	} else {
-		announceMove(game, req);
-		evaluateResolution(game);
-		cyclePlayers(game);
+		logic.announceMove(game, req);
+		logic.evaluateResolution(game);
+		logic.cyclePlayers(game);
 	}
 
 	return game;
