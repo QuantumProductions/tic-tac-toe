@@ -1,7 +1,6 @@
 var logic = require('./logic.js');
 
 var move = function(game, req) {
-	console.log("moving game id" + game.game_id);
 	if (game.error) {
 		return game;
 	}
@@ -10,8 +9,6 @@ var move = function(game, req) {
 	var y = req.query.y;
 
 	if (!game.players[game.current_player]) {
-		console.log("game.current_player" + game.current_player);
-		console.log(game.players);
 		game.error = game.current_player + " has not joined yet.";
 		return game;
 	}
@@ -23,10 +20,6 @@ var move = function(game, req) {
 	//ensure within board bounds
 	var piece = logic.loadPiece(game, req);
 	var targetPiece = game.board[y][x];
-	console.log("game.board[y][x]" + game.board[y][x] + "foo");
-	console.log("Pieces" + game.pieces);
-	console.log(targetPiece);
-	console.log(game.pieces["X"]);
 	var pieceFunction = game.pieces[targetPiece];
 	pieceFunction(game.board, piece, x, y, null);
 	if (game.board.error) {
@@ -41,8 +34,6 @@ var move = function(game, req) {
 		logic.evaluateResolution(game);
 		logic.cyclePlayers(game);
 	}
-
-	console.log("moved game id" + game.game_id);	
 
 	return game;
 }

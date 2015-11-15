@@ -1,9 +1,16 @@
 function processClick(game) {
 	var x = Math.floor(cursor.x / client.render_distances['tile_size']);
 	var y = Math.floor(cursor.y / client.render_distances['tile_size']);
-	game = client.processClick(game, x, y);
-	console.log("Processed for game" + game);
-	console.log("game.game_id" + game.game_id);
+	if (client.local == true) {
+		game = client.processClick(game, x, y);
+	 	return game;		
+	} else {
+	 	client.processClick(game, x, y);
+	 	return game;
+	}
+	
+	// }
+	
 }
 
 function processMouseMove() {
@@ -12,6 +19,7 @@ function processMouseMove() {
 
 function draw() {
 	if (!game || !game.board) {
+		console.log("no game or board");
 		return;
 	}
 
