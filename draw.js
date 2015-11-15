@@ -21,7 +21,7 @@ context = canvas.getContext('2d');
 canvas.addEventListener('click', function(e) { 	
   cursor.x = e.pageX - canvas.offsetLeft;
   cursor.y = e.pageY - canvas.offsetTop;
-	processClick();
+	game = processClick(game);
 }, false);
 
 setInterval(draw, 10);

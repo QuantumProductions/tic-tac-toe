@@ -74,7 +74,8 @@ function setupClient(client) {
 	    url: url,
 	    onload: function() { 
 	    	game = JSON.parse(this.responseText);
-	    	console.log("Clicked for game id" + game.game_id);
+	    	console.log("Moved JSON");
+	    	console.log(game.game_id);
 	    	if (game.winner != undefined) {
 	    		//assignWinner
 	    	} else if (game.error) {
@@ -83,6 +84,7 @@ function setupClient(client) {
 					var node = document.getElementById('cycle');
 		    	node.style.visibility = 'visible';	    		
 	    	}
+	    	return game;
 	    }
 		});
 	}
@@ -93,7 +95,7 @@ function setupClient(client) {
 		if (client.playLocal) {
 			return;
 		}
-
+		console.log("downloading" + game.game_id);
 		if (game && game.game_id) {
 			var url = client.base_url;
 			console.log("CLient game id" + game.game_id);
@@ -103,6 +105,7 @@ function setupClient(client) {
 		    url: url,
 		    onload: function() { 
 		    	game = JSON.parse(this.responseText);
+
 		    	console.log("Parsed JSON" + game.game_id);
  					client.players = game.players;
  					console.log("players" + this.responseText);

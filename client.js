@@ -1,11 +1,9 @@
-function processClick() {
+function processClick(game) {
 	var x = Math.floor(cursor.x / client.render_distances['tile_size']);
 	var y = Math.floor(cursor.y / client.render_distances['tile_size']);
-	// console.log("Processing click for game" + game);
-	// console.log("game.game_id" + game.game_id);
 	game = client.processClick(game, x, y);
-	// console.log("Processed for game" + game);
-	// console.log("game.game_id" + game.game_id);
+	console.log("Processed for game" + game);
+	console.log("game.game_id" + game.game_id);
 }
 
 function processMouseMove() {

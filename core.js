@@ -1,6 +1,7 @@
 var logic = require('./logic.js');
 
 var move = function(game, req) {
+	console.log("moving game id" + game.game_id);
 	if (game.error) {
 		return game;
 	}
@@ -40,6 +41,8 @@ var move = function(game, req) {
 		logic.evaluateResolution(game);
 		logic.cyclePlayers(game);
 	}
+
+	console.log("moved game id" + game.game_id);	
 
 	return game;
 }
