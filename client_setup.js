@@ -3,8 +3,10 @@ function setupClient(client) {
 	client.local = false
 	installRendering(client);
 
+  //custom function -- custom_client_setup?
 	client.playLocal = function() {
 		client.local = true;
+		//setup local play (custom game function)
 		game.players = {};
 		game.players["X"] = {"account" : {"name" : "foo"}, "piece" : "X"};
 		game.players["O"] = {"account" : {"name" : "bar"}, "piece" : "O"};
@@ -18,6 +20,7 @@ function setupClient(client) {
 		console.log("LOCAL current player" + game.current_player);
 	}
 
+  //custom parsing on account matching for local data
 	client.loadPlayersForGame = function(game) {
 		var players = Object.keys(game.players);
 	 	for (var i = 0; i < players.length; i++) {
@@ -28,12 +31,13 @@ function setupClient(client) {
 	   }
 	}
 
+	//standard, overridable callback
 	client.findGame = function() {
 		alert('client account name' + client.account.name);
 		client.local = false;
 		http.get({
 	    url: "http://localhost:3000/game/play?name=" + client.account.name,
-	    onload: function() { 
+	    onload: function() { //extract to standard overridable callback
 	    	game = JSON.parse(this.responseText);
 	    	client.players = game.players;
 	    	client.new_game_id = game.game_id;
@@ -41,6 +45,7 @@ function setupClient(client) {
 		});
 	}
 
+	//standardize function, custom req input params
 	client.processClick = function(game, x, y, callback) {
 		console.log("local" + game.current_player + "" + client.local);
 		if (client.local == true) { //extract to evaluate resolution || update?
@@ -55,7 +60,6 @@ function setupClient(client) {
 				}
 				callback(game);
 				return;
-				return game;
 		}
 		//server.move({game_id:})
 		//server.move[0](game_id...)
@@ -68,7 +72,8 @@ function setupClient(client) {
 		console.log("callback" + callback);
 		var url = client.base_url;
 		url = url + "/game/" + game.game_id;
-		url = url + "/move?player=" + client.player + "&x=" + x + "&y=" + y;
+		url = url + "/move?player=" + client.player + "&x=" + x + "&y=" + y; //extract as input_params
+		//server.move[client.offlineOrOnlineServerId](input_params);
 		http.get({
 	    url: url,
 	    onload: function() { 
@@ -92,7 +97,10 @@ function setupClient(client) {
 		});
 	}
 
+  //standard function, extract render call
+  //this is download current Game == continuously update the active game
 	client.downloadGame = function() {
+		//server.loadCurrentGame()
 		//load game, render
 
 		if (client.local == true) {
@@ -107,7 +115,7 @@ function setupClient(client) {
 		    	game = JSON.parse(this.responseText);
  					client.players = game.players;
  					client.loadPlayersForGame(game);
- 					//render call
+ 					//render call out for player text display
  					var node = document.getElementById('turn');
  					node.innerText = game.current_player + "'s turn";
 
@@ -125,12 +133,18 @@ function setupClient(client) {
 		}
 	}
 
+
+  //overridable requirements
+  //overridable params
 	client.register = function() {
+		//overridable requirements
 		var node = document.getElementById('name');
     if (!node.value) {
     	alert("Enter player name.");
     	return;
     }
+
+    //params overridable
     client.name = node.value;
     var url = client.base_url + "/account/new?name=" + client.name;
 
@@ -139,48 +153,7 @@ function setupClient(client) {
 		    onload: function() { 
 		    	account = JSON.parse(this.responseText);
 		    	client.account = account;
-		    	client.loadGames();
-		    }
-			});
-	}
-
-	client.loadGames = function() { //stub for initial
-		//stub for load games success, callback
-		var node = document.getElementById('name');
-    if (!node.value) {
-    	alert("Enter player name.");
-    } //sign in and get account data
-
-    client.account = {'name' : node.value };
-
- 		var url = client.base_url + "/account" + "/status?name=" + client.account.name; //use auth token
-
-		http.get({
-		    url: url,
-		    onload: function() {  //this function could be a callback
-		    	client.account = JSON.parse(this.responseText);
-		    	alert("Game Ids" + client.account.game_ids);
-
-		    	var node = document.getElementById('register');
-		    	node.style.visibility = 'hidden';
-		    	
-		    	if (client.account.game_ids.length === 0) {
-		    		console.log("no games, finding game");
-		    		client.findGame();
-		    	} else {
-		    		var game_id = client.account.game_ids[0];
-
-		    		if (client.new_game_id) {
-		    			game_id = client.new_game_id;
-		    			client.new_game_id = null;
-		    			client.game_index = client.account.game_ids.length - 1;
-		    		}
-		    		alert("Game_id" + game_id);
-		    		game = {'board' : [], 'game_id' : game_id};
-		    		client.game_index = 0;
-		    		console.log("downloading game" + game.game_id);
-		    		client.downloadGame();
-		    	}
+		    	client.findGame();
 		    }
 			});
 	}
