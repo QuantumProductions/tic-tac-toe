@@ -17,7 +17,6 @@ function installRendering(client) {
 		}
 
 	client.render_status = function(game) {
-		console.log(game.current_player);
 
 		if (game.players.X) {
 			var node = document.getElementById('player-x');

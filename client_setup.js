@@ -41,7 +41,7 @@ function setupClient(client) {
 		});
 	}
 
-	client.processClick = function(game, x, y) {
+	client.processClick = function(game, x, y, callback) {
 		console.log("local" + game.current_player + "" + client.local);
 		if (client.local == true) { //extract to evaluate resolution || update?
 				req = {"query" : {"player" : game.current_player, "x" : x, "y" : y}};
@@ -53,6 +53,8 @@ function setupClient(client) {
 				if (game.winner) {
 					alert("Winner: " + game.winner);
 				}
+				callback(game);
+				return;
 				return game;
 		}
 		//server.move({game_id:})
@@ -63,7 +65,7 @@ function setupClient(client) {
 		// console.log(game.board[0]);
 		
 		// return game;	
-
+		console.log("callback" + callback);
 		var url = client.base_url;
 		url = url + "/game/" + game.game_id;
 		url = url + "/move?player=" + client.player + "&x=" + x + "&y=" + y;
@@ -73,13 +75,19 @@ function setupClient(client) {
 	    	game = JSON.parse(this.responseText);
 	    	if (game.winner != undefined) {
 	    		//assignWinner
+	    		if (game.winner) {
+					alert("Winner: " + game.winner);
+					}
 	    	} else if (game.error) {
 	    		alert("Error: " + game.error);
 	    	} else {
 					var node = document.getElementById('cycle');
 		    	node.style.visibility = 'visible';	    		
 	    	}
-	    	return game;
+	    	console.log("real callback" + callback);
+	    	callback(game);
+	    	return;
+//	    	return game;
 	    }
 		});
 	}

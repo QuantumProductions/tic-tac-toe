@@ -1,16 +1,8 @@
-function processClick(game) {
+function processClick(game, callback) {
 	var x = Math.floor(cursor.x / client.render_distances['tile_size']);
 	var y = Math.floor(cursor.y / client.render_distances['tile_size']);
-	if (client.local == true) {
-		game = client.processClick(game, x, y);
-	 	return game;		
-	} else {
-	 	client.processClick(game, x, y);
-	 	return game;
-	}
-	
-	// }
-	
+
+	client.processClick(game, x, y, callback);
 }
 
 function processMouseMove() {
