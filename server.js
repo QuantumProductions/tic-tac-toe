@@ -9,9 +9,11 @@ var games = [];
 
 if (app != undefined && app != null) {}
 
-app.get('/game/:id/move', function (req, res) {
+app.get('/game/:game_id/move', function (req, res) {
+	console.log("Moving-id" + game.game_id);
 	game = gameLoader.findGame(req);  //server.move
 	game = core.move(game, req);
+	console.log("moved id" + game.game_id);
 	res.json(game);
 });
 

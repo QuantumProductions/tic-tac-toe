@@ -3,9 +3,16 @@ var logic = require('./logic.js');
 var games = [];
 
 var findGame = function(req) {
-	var game_id = parseInt(req.params.id);
-	// console.log("game id" + game_id);
-	// console.log("games" + games);
+	var game_id;
+	if (req.query.game_id != undefined) {
+		console.log("loading by query");
+		game_id = parseInt(req.query.game_id);
+	} else {
+		console.log("game id was undefined, loading by params" + req.params.game_id);
+		game_id = req.params.game_id
+	}
+	 console.log("game id" + game_id);
+	 console.log("games" + games);
 	if (game_id <= games.length) {
 		var game = games[game_id-1];
 		game.error = null;
@@ -28,6 +35,11 @@ var play = function(req) {
 		if (openToPlayer(game, account)) {
 			game = enterPlayer(game, account);
 			linkGameToAccount(game, account);
+			console.log("Linking game to account" + game.game_id + "" + account.name); 
+			return game;
+		}
+
+		if (isPlayersTurn(game, account)){
 			return game;
 		}
 	}
@@ -54,10 +66,21 @@ var linkGameToAccount = function(game, account) {
 	account.game_ids.push(game.game_id);
 }
 
+var isPlayersTurn = function(game, account) {
+	var currentPlayer = game.currentPlayer;
+	var currentPlayerAccount = game.players[currentPlayer].account;
+	if (currentPlayerAccount.name == account.name) {
+		return true;
+	}
+
+	return false;
+}
+
 var openToPlayer = function(game, account) {
 	//extract to logic
 	var playerKeys = Object.keys(game.players);
 	console.log("player keys" + playerKeys + "" + playerKeys.length);
+
 	if (playerKeys.length < 2) {
 		for (var i = 0; i < playerKeys.length; i++) {
 			var player = game.players[playerKeys[i]];

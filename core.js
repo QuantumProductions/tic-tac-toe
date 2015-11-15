@@ -22,6 +22,10 @@ var move = function(game, req) {
 	//ensure within board bounds
 	var piece = logic.loadPiece(game, req);
 	var targetPiece = game.board[y][x];
+	console.log("game.board[y][x]" + game.board[y][x] + "foo");
+	console.log("Pieces" + game.pieces);
+	console.log(targetPiece);
+	console.log(game.pieces["X"]);
 	var pieceFunction = game.pieces[targetPiece];
 	pieceFunction(game.board, piece, x, y, null);
 	if (game.board.error) {

@@ -32,6 +32,7 @@ function setupClient(client) {
 
 	client.findGame = function() {
 		alert('client account name' + client.account.name);
+		client.playLocal = false;
 		http.get({
 	    url: "http://localhost:3000/game/play?name=" + client.account.name,
 	    onload: function() { 
@@ -43,7 +44,8 @@ function setupClient(client) {
 	}
 
 	client.processClick = function(game, x, y) {
-		if (client.playLocal) {
+		if (client.playLocal === true) { //extract to evaluate resolution || update?
+			console.log("Playing Locally");
 				req = {"query" : {"player" : game.current_player, "x" : x, "y" : y}};
 				game = move(game, req);
 				if (game.error) {
@@ -67,11 +69,12 @@ function setupClient(client) {
 		var url = client.base_url;
 		url = url + "/game/" + game.game_id;
 		url = url + "/move?player=" + client.player + "&x=" + x + "&y=" + y;
-
+		console.log("game id" + game.game_id);
 		http.get({
 	    url: url,
 	    onload: function() { 
 	    	game = JSON.parse(this.responseText);
+	    	console.log("Clicked for game id" + game.game_id);
 	    	if (game.winner != undefined) {
 	    		//assignWinner
 	    	} else if (game.error) {
@@ -86,14 +89,23 @@ function setupClient(client) {
 
 	client.downloadGame = function() {
 		//load game, render
+
+		if (client.playLocal) {
+			return;
+		}
+
 		if (game && game.game_id) {
 			var url = client.base_url;
+			console.log("CLient game id" + game.game_id);
+			console.log("Game" + game);
 			url = url + "/game/load?game_id=" + game.game_id;
 			http.get({
 		    url: url,
 		    onload: function() { 
 		    	game = JSON.parse(this.responseText);
+		    	console.log("Parsed JSON" + game.game_id);
  					client.players = game.players;
+ 					console.log("players" + this.responseText);
  					client.loadPlayersForGame(game);
  					//render call
  					var node = document.getElementById('turn');
