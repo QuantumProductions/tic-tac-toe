@@ -45,7 +45,7 @@ var play = function(req) {
 	game = startGame(game, account, req);
 	var gamePlayers = Object.keys(game.players);
 	console.log("game started, players: " + gamePlayers.length);
-	game.game_id = games.length + 1;
+	game.game_id = games.length + 1; //extract assign game id
 	game = enterPlayer(game, account);
 	linkGameToAccount(game, account);
 	console.log("account games_ids" + account.game_ids);
@@ -62,6 +62,7 @@ var linkGameToAccount = function(game, account) {
 	account.game_ids.push(game.game_id);
 }
 
+//standard
 var isPlayersTurn = function(game, account) {
 	var currentPlayer = game.current_player;
 	console.log("game current player" + game.current_player);
@@ -100,6 +101,7 @@ var openToPlayer = function(game, account) {
 	return false;
 }
 
+//custom override
 var enterPlayer = function(game, account) {
 	console.log(account.name + "entering game" + game.game_id);
 	if (game.players['X']) {
@@ -114,6 +116,7 @@ var enterPlayer = function(game, account) {
 
 var startGame = function(game, account, req) {
 	game = logic.setupGame(game, req);
+	//override broadcast for account
 	return game;
 }
 
