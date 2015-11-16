@@ -5,14 +5,11 @@ var games = [];
 var findGame = function(req) {
 	var game_id;
 	if (req.query.game_id != undefined) {
-		console.log("loading by query");
 		game_id = parseInt(req.query.game_id);
 	} else {
-		console.log("game id was undefined, loading by params" + req.params.game_id);
 		game_id = req.params.game_id
 	}
-	 console.log("game id" + game_id);
-	 console.log("games" + games);
+
 	if (game_id <= games.length) {
 		var game = games[game_id-1];
 		game.error = null;
@@ -50,7 +47,6 @@ var play = function(req) {
 	console.log("game started, players: " + gamePlayers.length);
 	game.game_id = games.length + 1;
 	game = enterPlayer(game, account);
-	console.log("game id: " + game.game_id);
 	linkGameToAccount(game, account);
 	console.log("account games_ids" + account.game_ids);
 	games.push(game);
@@ -67,10 +63,16 @@ var linkGameToAccount = function(game, account) {
 }
 
 var isPlayersTurn = function(game, account) {
-	var currentPlayer = game.currentPlayer;
-	var currentPlayerAccount = game.players[currentPlayer].account;
-	if (currentPlayerAccount.name == account.name) {
-		return true;
+	var currentPlayer = game.current_player;
+	console.log("game current player" + game.current_player);
+
+	var gameCurrentPlayer = game.players[currentPlayer];
+	if (gameCurrentPlayer != undefined) {
+		var currentPlayerAccount = game.players[currentPlayer].account;
+		if (currentPlayerAccount.name == account.name) {
+			console.log("current player matches");
+			return true;
+		}	
 	}
 
 	return false;
