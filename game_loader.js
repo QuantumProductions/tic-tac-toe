@@ -29,14 +29,14 @@ var play = function(req) {
 
 	for (var i = 0; i < games.length; i++) {
 		game = games[i];
+		if (isPlayersTurn(game, account)){
+			return game;
+		}
+
 		if (openToPlayer(game, account)) {
 			game = enterPlayer(game, account);
 			linkGameToAccount(game, account);
 			console.log("Linking game to account" + game.game_id + "" + account.name); 
-			return game;
-		}
-
-		if (isPlayersTurn(game, account)){
 			return game;
 		}
 	}
