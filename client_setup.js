@@ -134,6 +134,19 @@ function setupClient(client) {
 	}
 
 
+	client.login = function() {
+		var node = document.getElementById('name');
+    if (!node.value) {
+    	alert("Enter player name.");
+    	return;
+    }
+
+    //params overridable
+    client.name = node.value;
+    client.account = {"name" : node.value}
+    client.findGame();
+	}
+
   //overridable requirements
   //overridable params
 	client.register = function() {
