@@ -14,12 +14,56 @@ class Game {
 		this.pieces = {};
 	}
 
-	completeTurn(player) {
-		//override
+	onMoveComplete(req) {
+		this.announceMove(req);
+		this.evaluateResolution();
 	}
 
 	evaluateResolution() {
 		//override
+	}
+
+	permitPlay(player) {
+
+	}
+
+	permitMove(player, req) {
+
+	}
+
+	move(req) {
+		if (this.error) {
+			return game;
+		}
+
+		var player = req.query.player;
+		
+		this.permitPlay(player);
+		this.permitMove(player, req);
+
+		if (this.error) {
+			return this;
+		}
+
+		var x = req.query.x;
+		var y = req.query.y;
+
+		var piece = loadPiece(game, req);
+		var targetPiece = this.board[y][x];
+		var pieceFunction = this.pieces[targetPiece];
+		pieceFunction(this.board, piece, x, y, null);
+		if (this.board.error) {
+			this.error = this.board.error;
+			this.board.error = null;
+		}
+
+		if (this.error) {
+			return this;
+		} else {
+			onMoveComplete(req);
+		}
+
+		return this;
 	}
 }
 
@@ -51,11 +95,26 @@ class TicTacToe(Game) {
 		}
 	};
 
-	completeTurn(player) {
+	onMoveComplete(player) {
+		super.onMoveComplete(player);
+		this.cyclePlayers();
+	}
+
+	cyclePlayers() {
 		if (this.current_player === "X") {
 			this.current_player = "O";
 		} else if (this.current_player === "O") {
 			this.current_player = "X";
+		}
+	}
+
+	permitPlay(player) {
+		if (player != this.current_player) {
+			this.error = "Not your turn.";
+		}
+
+		if (!this.players[game.current_player]) {
+			this.error = game.current_player + " has not joined yet.";
 		}
 	}
 
@@ -98,6 +157,10 @@ class TicTacToe(Game) {
 			}
 		}
 
-//		konsole.watch("winner",game.winner);
+		konsole.watch("winner",game.winner);
+	}
+
+	loadPlayer(req) {
+		return this.players[req.query.player].piece;
 	}
 }
