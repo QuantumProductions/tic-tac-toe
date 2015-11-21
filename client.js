@@ -1,4 +1,5 @@
-var GAME = window.GAME || {};
+window.GAME = window.GAME || {};
+
 GAME.client = (function() {
   function processClick(game, callback) {
     var x = Math.floor(cursor.x / client.render_distances['tile_size']);
@@ -14,6 +15,7 @@ GAME.client = (function() {
   var last_frame;
   function draw() {
     if (!game || !game.board) {
+      last_frame = window.requestAnimationFrame(draw);
       return;
     }
 

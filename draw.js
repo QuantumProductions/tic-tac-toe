@@ -26,6 +26,6 @@ canvas.addEventListener('click', function(e) {
 	});
 }, false);
 
-setInterval(GAME.client.draw,20);
+GAME.client.draw();
 
 setBackground();

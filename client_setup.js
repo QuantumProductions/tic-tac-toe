@@ -44,7 +44,7 @@ function setupClient(client) {
 
 	//standardize function, custom req input params
 	client.processClick = function(game, x, y, callback) {
-		console.log("local" + game.current_player + "" + client.local);
+		konsole.watch("local",game.current_player + "" + client.local);
 		if (client.local == true) { //extract to evaluate resolution || update?
 				req = {"query" : {"player" : game.current_player, "x" : x, "y" : y}};
 				game = move(game, req);
