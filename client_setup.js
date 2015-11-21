@@ -10,14 +10,11 @@ function setupClient(client) {
 		game.players = {};
 		game.players["X"] = {"account" : {"name" : "foo"}, "piece" : "X"};
 		game.players["O"] = {"account" : {"name" : "bar"}, "piece" : "O"};
-		console.log(game.players["X"]);
 		game.current_player = "X";
-		console.log(game.current_player);
 
 		game = setupGame(game);
 		game.players["X"] = {"account" : {"name" : "foo"}, "piece" : "X"};
 		game.players["O"] = {"account" : {"name" : "bar"}, "piece" : "O"};
-		console.log("LOCAL current player" + game.current_player);
 	}
 
   //custom parsing on account matching for local data
@@ -47,7 +44,7 @@ function setupClient(client) {
 
 	//standardize function, custom req input params
 	client.processClick = function(game, x, y, callback) {
-		console.log("local" + game.current_player + "" + client.local);
+		konsole.watch("local",game.current_player + "" + client.local);
 		if (client.local == true) { //extract to evaluate resolution || update?
 				req = {"query" : {"player" : game.current_player, "x" : x, "y" : y}};
 				game = move(game, req);
