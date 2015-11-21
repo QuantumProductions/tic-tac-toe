@@ -91,10 +91,4 @@ logic = {
 	"announceMove" : announceMove
 };
 
-module.exports = {
-	"setupGame": setupGame,
-	"cyclePlayers": cyclePlayers,
-	"evaluateResolution": evaluateResolution,
-	"loadPiece" : loadPiece,
-	"announceMove" : announceMove
-};
+module.exports = logic;
