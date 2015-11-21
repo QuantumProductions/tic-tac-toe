@@ -21,6 +21,7 @@
     "babel-loader": "^6.2.0",
     "css-loader": "^0.23.0",
     "express": "^4.13.3",
+    "express-json": "^1.0.0",
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.4",
     "less": "^2.5.3",
