@@ -23,7 +23,7 @@ class Game {
 		//override
 	}
 
-	permitPlay(player) {
+	permitPlayer(player) {
 
 	}
 
@@ -38,7 +38,7 @@ class Game {
 
 		var player = req.query.player;
 		
-		this.permitPlay(player);
+		this.permitPlayer(player);
 		this.permitMove(player, req);
 
 		if (this.error) {
@@ -108,13 +108,22 @@ class TicTacToe(Game) {
 		}
 	}
 
-	permitPlay(player) {
+	permitPlayer(player) {
 		if (player != this.current_player) {
 			this.error = "Not your turn.";
 		}
 
 		if (!this.players[game.current_player]) {
 			this.error = game.current_player + " has not joined yet.";
+		}
+	}
+
+	permitMove(player, req) {
+		var x = req.query.x;
+		var y = req.query.y;
+
+		if (x < 0 || y < 0 || x > this.board.length - 1 || y > this.board.length - 1) {
+			this.error = "Placement out of bounds.";
 		}
 	}
 
