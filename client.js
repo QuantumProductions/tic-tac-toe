@@ -11,9 +11,9 @@ GAME.client = (function() {
     //;
   }
 
+  var last_frame;
   function draw() {
     if (!game || !game.board) {
-      console.log("no game or board");
       return;
     }
 
@@ -30,7 +30,7 @@ GAME.client = (function() {
     }
 
     client.render_status(game);
-
+    last_frame = window.requestAnimationFrame(draw);
   }
   return {
     processClick: processClick,

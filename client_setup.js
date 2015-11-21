@@ -10,14 +10,11 @@ function setupClient(client) {
 		game.players = {};
 		game.players["X"] = {"account" : {"name" : "foo"}, "piece" : "X"};
 		game.players["O"] = {"account" : {"name" : "bar"}, "piece" : "O"};
-		console.log(game.players["X"]);
 		game.current_player = "X";
-		console.log(game.current_player);
 
 		game = setupGame(game);
 		game.players["X"] = {"account" : {"name" : "foo"}, "piece" : "X"};
 		game.players["O"] = {"account" : {"name" : "bar"}, "piece" : "O"};
-		console.log("LOCAL current player" + game.current_player);
 	}
 
   //custom parsing on account matching for local data

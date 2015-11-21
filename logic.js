@@ -72,7 +72,7 @@ var evaluateResolution = function(game) {
 		}
 	}
  
- 	console.log("winner: " + game.winner);
+ 	konsole.watch("winner",game.winner);
 }
 
 var loadPiece = function(game, req) {
