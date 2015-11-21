@@ -3,12 +3,7 @@ var logic = require('./logic.js');
 var games = [];
 
 var findGame = function(req) {
-	var game_id;
-	if (req.query.game_id != undefined) {
-		game_id = parseInt(req.query.game_id);
-	} else {
-		game_id = req.params.game_id
-	}
+	var game_id = parseInt(req.query.game_id) || req.params.game_id;
 
 	if (game_id <= games.length) {
 		var game = games[game_id-1];
