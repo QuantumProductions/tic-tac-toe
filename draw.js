@@ -18,14 +18,14 @@ var canvas = document.getElementById("canvas");
 context = canvas.getContext('2d');
 
 
-canvas.addEventListener('click', function(e) { 	
+canvas.addEventListener('click', function(e) {
   cursor.x = e.pageX - canvas.offsetLeft;
   cursor.y = e.pageY - canvas.offsetTop;
-	processClick(game, function(updatedGame) {
+	GAME.client.processClick(game, function(updatedGame) {
 		game = updatedGame;
 	});
 }, false);
 
-setInterval(draw, 10);
+setInterval(GAME.client.draw,20);
 
 setBackground();
