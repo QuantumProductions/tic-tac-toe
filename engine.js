@@ -67,7 +67,7 @@ class Game {
 	}
 }
 
-class TicTacToe(Game) {
+class TicTacToe extends Game {
   setupPlayers() {
 		super.setupPlayers();
 		this.current_player = "X";

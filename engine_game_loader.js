@@ -1,6 +1,6 @@
 class GameLoader {
 	constructor() {
-		this.games = this.storedGames();
+		this.games = this.storedGames() || [];
 	}
 
 	findGame(req) {
