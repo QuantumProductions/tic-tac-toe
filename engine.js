@@ -1,17 +1,14 @@
 class Game {
 	constructor(options) {
 		setupPlayers();
-		setupBoard();
-		setupPieces();
+		resetBoard();
+		resetGame();
 	}
 	setupPlayers() {
 		this.players = {};
 	}
-	setupBoard() {
+	resetBoard() {
 		this.board = [];
-	}
-	setupPieces() {
-		this.pieces = {};
 	}
 
 	onMoveComplete(req) {
@@ -23,48 +20,23 @@ class Game {
 		//override
 	}
 
-	permitPlayer(player) {
+	onKeyUp(key) {
 
 	}
 
-	permitMove(player, req) {
+	onKeyDown(key) {
 
 	}
 
-	move(req) {
-		if (this.error) {
-			return game;
-		}
+	onMouseUp(x, y) {
 
-		var player = req.query.player;
-		
-		this.permitPlayer(player);
-		this.permitMove(player, req);
-
-		if (this.error) {
-			return this;
-		}
-
-		var x = req.query.x;
-		var y = req.query.y;
-
-		var piece = loadPiece(game, req);
-		var targetPiece = this.board[y][x];
-		var pieceFunction = this.pieces[targetPiece];
-		pieceFunction(this.board, piece, x, y, null);
-		if (this.board.error) {
-			this.error = this.board.error;
-			this.board.error = null;
-		}
-
-		if (this.error) {
-			return this;
-		} else {
-			onMoveComplete(req);
-		}
-
-		return this;
 	}
+
+	onMouseDown(x, y) {
+
+	}
+
+
 }
 
 class TicTacToe extends Game {
@@ -73,10 +45,14 @@ class TicTacToe extends Game {
 		this.current_player = "X";
   }
 
-  setupBoard() {
+  resetBoard() {
   	this.board =  [[' ', ' ', ' '],
 	              [' ', ' ', ' '],
 	              [' ', ' ', ' ']]; 
+  }
+
+  resetGame() {
+  	this.setupPieces();
   }
 
   setupPieces() {
@@ -127,6 +103,12 @@ class TicTacToe extends Game {
 		}
 	}
 
+	permitMove(player, req) {
+
+	}
+
+
+
 	evaluateResolution() {
 		var board = this.board;
 		var winningAlignments = [
@@ -169,7 +151,57 @@ class TicTacToe extends Game {
 		konsole.watch("winner",game.winner);
 	}
 
+	permitPlayer(player) {
+
+	}
+
+	permitMove(player, req) {
+
+	}
+
+	move(req) {
+		if (this.error) {
+			return game;
+		}
+
+		var player = req.query.player;
+		
+		this.permitPlayer(player);
+		this.permitMove(player, req);
+
+
+		if (this.error) {
+			return this;
+		}
+
+		var x = req.query.x;
+		var y = req.query.y;
+
+		var piece = loadPiece(game, req);
+		var targetPiece = this.board[y][x];
+		var pieceFunction = this.pieces[targetPiece];
+		pieceFunction(this.board, piece, x, y, null);
+		if (this.board.error) {
+			this.error = this.board.error;
+			this.board.error = null;
+		}
+
+		if (this.error) {
+			return this;
+		} else {
+			onMoveComplete(req);
+		}
+
+		return this;
+	}
+
 	loadPlayer(req) {
 		return this.players[req.query.player].piece;
 	}
+
+	onMouseDown(x, y) {
+		var x = Math.floor(x / 50);
+    var y = Math.floor(y / 50);
+	}
+
 }
