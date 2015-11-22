@@ -3,15 +3,11 @@
 class Client {
 	constructor(options) {
 		this.canvas = document.createElement("canvas");
-		document.body.appendChild(this.canvas);
-		console.log("this.canvas" + this.canvas);
 		this.canvas.width = 500;
 		this.canvas.height = 500;
 
-		this.canvas.addEventListener("onMouseUp",this.onMouseUp.bind(this));
-		this.canvas.addEventListener("onMouseDown",this.onMouseDown.bind(this));
-		window.addEventListener("onKeyDown",this.onKeyDown.bind(this));
-		window.addEventListener("onKeyUp",this.onKeyUp.bind(this));
+		this.canvas.addEventListener("click", this.onMouseDown.bind(this), false);
+		document.body.appendChild(this.canvas);
 		
 		this.key_map = {
 			37: 'L1',
@@ -22,6 +18,7 @@ class Client {
 
 		this.game = new TicTacToe();
 	}
+
 
 	onKeyUp(event) {
 		this.game.onKeyUp(this.key_map[event.keyCode]);

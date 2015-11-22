@@ -34,7 +34,7 @@ class Game {
 	}
 
 	onMouseDown(x, y) {
-		console.log("hello");
+		
 	}
 
 
