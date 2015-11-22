@@ -56,19 +56,21 @@ class TicTacToe extends Game {
   }
 
   setupPieces() {
-  	this.pieces = ' ': function(board, piece, x, y, data) {
-			if (piece === 'X') {
-				board[y][x] = "X";
-			} else if (piece === "O") {
-				board[y][x] = "O";
-			}
-		},
-		'X': function(board, piece, x, y, data) {
-			board.error = 'X Occupied space' + x + "y" + y;
-		},
-		'O': function(board, piece, x, y, data) {
-			board.error = 'O Occupied space' + x + "y" + y;
-		}
+  	this.pieces = {
+      ' ': function(board, piece, x, y, data) {
+			  if (piece === 'X') {
+				  board[y][x] = "X";
+			  } else if (piece === "O") {
+				  board[y][x] = "O";
+			  }
+		  },
+		  'X': function(board, piece, x, y, data) {
+			  board.error = 'X Occupied space' + x + "y" + y;
+		  },
+		  'O': function(board, piece, x, y, data) {
+			  board.error = 'O Occupied space' + x + "y" + y;
+		  }
+    }
 	};
 
 	onMoveComplete(player) {
@@ -102,11 +104,6 @@ class TicTacToe extends Game {
 			this.error = "Placement out of bounds.";
 		}
 	}
-
-	permitMove(player, req) {
-
-	}
-
 
 
 	evaluateResolution() {
@@ -149,14 +146,6 @@ class TicTacToe extends Game {
 		}
 
 		konsole.watch("winner",game.winner);
-	}
-
-	permitPlayer(player) {
-
-	}
-
-	permitMove(player, req) {
-
 	}
 
 	move(req) {

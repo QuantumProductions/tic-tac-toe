@@ -1,33 +1,34 @@
 {
-  "name": "t3",
+  "name": "paint",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "yet another paint clone",
+  "main": "index.js",
+  "dependencies": {
+    "babel-core": "*",
+    "babel-loader": "*",
+    "css-loader": "^0.21.0",
+    "extract-text-webpack-plugin": "^0.9.1",
+    "file-loader": "^0.8.4",
+    "grunt-es6-transpiler": "^1.0.2",
+    "karma": "^0.13.14",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.1",
+    "less-plugin-clean-css": "^1.5.1",
+    "style-loader": "^0.13.0"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/QuantumProductions/tic-tac-toe.git"
+    "url": "https://github.com/chriscauley/paint.git"
   },
-  "author": "qp",
-  "license": "ISC",
+  "author": "chriscauley <chris@lablackey.com>",
+  "license": "(MIT)",
   "bugs": {
-    "url": "https://github.com/QuantumProductions/tic-tac-toe/issues"
+    "url": "https://github.com/chriscauley/paint/issues"
   },
-  "homepage": "https://github.com/QuantumProductions/tic-tac-toe#readme",
-  "dependencies": {
-    "babel-core": "^6.2.1",
-    "babel-loader": "^6.2.0",
-    "css-loader": "^0.23.0",
-    "express": "^4.13.3",
-    "express-json": "^1.0.0",
-    "extract-text-webpack-plugin": "^0.9.1",
-    "file-loader": "^0.8.4",
-    "less": "^2.5.3",
-    "less-loader": "^2.2.1",
-    "riot": "^2.3.1",
-    "style-loader": "^0.13.0",
-    "webpack": "^1.12.8"
-  }
+  "homepage": "https://github.com/chriscauley/paint"
 }
