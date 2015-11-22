@@ -1,3 +1,5 @@
+"use strict";
+
 class Game {
 	constructor(options) {
 		this.setupPlayers();
@@ -21,7 +23,6 @@ class Game {
 	}
 
 	onKeyUp(key) {
-
 	}
 
 	onKeyDown(key) {
@@ -33,7 +34,7 @@ class Game {
 	}
 
 	onMouseDown(x, y) {
-
+		console.log("hello");
 	}
 
 
@@ -191,6 +192,8 @@ class TicTacToe extends Game {
 	onMouseDown(x, y) {
 		var x = Math.floor(x / 50);
     var y = Math.floor(y / 50);
+    console.log("x" + x);
+    console.log("y" + y);
 	}
 
 }

@@ -1,2 +1,4 @@
-window.GAME = new TicTacToe();
-console.log(window.GAME.board);
+"use strict";
+
+window.client = new Client();
+console.log(window.client.game.board);

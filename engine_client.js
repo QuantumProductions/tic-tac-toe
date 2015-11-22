@@ -1,6 +1,10 @@
+"use strict";
+
 class Client {
 	constructor(options) {
 		this.canvas = document.createElement("canvas");
+		document.body.appendChild(this.canvas);
+		console.log("this.canvas" + this.canvas);
 		this.canvas.width = 500;
 		this.canvas.height = 500;
 
