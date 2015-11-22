@@ -1,4 +1,4 @@
-/*var LessPluginCleanCSS = require('less-plugin-clean-css');
+var LessPluginCleanCSS = require('less-plugin-clean-css');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
   entry: './entry.js',
@@ -7,12 +7,12 @@ module.exports = {
     filename: 'ttt.js',
     publicPath: '/.static/',
   },
-  resolve: {
-    riot: require.resolve('./node_modules/riot/riot.js')
-  },
+  //resolve: {
+  //  riot: require.resolve('./node_modules/riot/riot.js')
+  //},
   module: {
     loaders: [
-      { test: /\.(tag)$/, loader: "tag" },
+      //{ test: /\.(tag)$/, loader: "tag" },
       { test: /\.(png|woff|ttf|svg|eot|jpg)$/, loader: "file?name=[name].[hash:8].[ext]" },
       { test: /\.css$/, loader: "style!css" },
       { test: /\.js$/, loader: "babel-loader" },
@@ -26,25 +26,5 @@ module.exports = {
     lessPlugins: [
       new LessPluginCleanCSS({advanced: true})
     ]
-  }
-}
-*/
-module.exports = {
-  context: __dirname,
-  entry: "./entry.js",
-  output: {
-    path: __dirname + "/dist",
-    filename: "bundle.js"
-  },
-  devtool: "#source-map",
-  module: {
-    loaders: [
-      // Transpile any JavaScript file:
-      {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}
-    ]
-  },
-  resolve: {
-    // you can now require('file') instead of require('file.js')
-    extensions: ['', '.js', '.json']
   }
 }
