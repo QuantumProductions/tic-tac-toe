@@ -4,6 +4,7 @@
   "description": "yet another paint clone",
   "main": "index.js",
   "dependencies": {
+    "babel": "5.4.4",
     "babel-core": "*",
     "babel-loader": "*",
     "css-loader": "^0.21.0",
