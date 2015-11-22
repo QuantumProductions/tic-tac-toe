@@ -1,1 +1,1 @@
-babel engine.js engine_client.js > built.js
+babel engine.js engine_client.js engine_rev.js > built.js

@@ -1,8 +1,8 @@
 class Game {
 	constructor(options) {
-		setupPlayers();
-		resetBoard();
-		resetGame();
+		this.setupPlayers();
+		this.resetBoard();
+		this.resetGame();
 	}
 	setupPlayers() {
 		this.players = {};
