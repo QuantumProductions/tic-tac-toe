@@ -34,7 +34,7 @@ class Game {
 	}
 
 	onMouseDown(x, y) {
-		
+
 	}
 
 
@@ -194,6 +194,10 @@ class TicTacToe extends Game {
     var y = Math.floor(y / 50);
     console.log("x" + x);
     console.log("y" + y);
+	}
+
+	onKeyDown(event) {
+		console.log(event);
 	}
 
 }

@@ -8,6 +8,8 @@ class Client {
 
 		this.canvas.addEventListener("click", this.onMouseDown.bind(this), false);
 		document.body.appendChild(this.canvas);
+
+		window.addEventListener("keydown", this.onKeyDown.bind(this), true);
 		
 		this.key_map = {
 			37: 'L1',
@@ -25,7 +27,8 @@ class Client {
 	}
 
 	onKeyDown(event) {
-		this.game.onKeyDown(this.key_map[event.keyDown]);
+		console.log(event.keyCode);
+		this.game.onKeyDown(this.key_map[event.keyCode]);
 	}
 
 	onMouseUp(event) {
